@@ -80,12 +80,8 @@ WSGI_APPLICATION = 'HPA_Site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'HPA_DB',
-        'USER' : 'postgres',
-        'PASSWORD' : 'kokowawa1',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
