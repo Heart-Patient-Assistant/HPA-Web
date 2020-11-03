@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # local apps
      'HPA_Apps.users',
      'HPA_Apps.services',
-     'HPA_Apps.tips',
+     'HPA_Apps.blogs',
      'HPA_Apps.feedback',
 ]
 

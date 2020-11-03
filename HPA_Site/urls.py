@@ -23,6 +23,6 @@ urlpatterns = [
     path("",views.home,name='home'),
     path('users/',include("HPA_Apps.users.urls")),
     path('services/',include("HPA_Apps.services.urls")),
-    path('tips/',include("HPA_Apps.tips.urls")),
+    path('blogs/',include("HPA_Apps.blogs.urls")),
 
 ]
