@@ -41,11 +41,10 @@ INSTALLED_APPS = [
     # 3rd party apps
 
     # local apps
-    'HPA_Apps.users.apps.UsersConfig',
-    'HPA_Apps.services',
-    'HPA_Apps.tips',
-    'HPA_Apps.feedback',
-    'HPA_Apps.blogs'
+     'HPA_Apps.users',
+     'HPA_Apps.services',
+     'HPA_Apps.tips',
+     'HPA_Apps.feedback',
 ]
 
 MIDDLEWARE = [

@@ -15,14 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-<<<<<<< HEAD
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('users',include('HPA_Apps.users.urls')),
-=======
-
-
 from . import views
 
 
@@ -32,9 +24,5 @@ urlpatterns = [
     path('users/',include("HPA_Apps.users.urls")),
     path('services/',include("HPA_Apps.services.urls")),
     path('tips/',include("HPA_Apps.tips.urls")),
-    path('blogs/',include("HPA_Apps.blogs.urls")),
-    
-    
 
->>>>>>> 644a3d47c25e2ad7c967a5bc9fe39644ba817ef4
 ]
