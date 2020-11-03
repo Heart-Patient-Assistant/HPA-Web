@@ -12,3 +12,4 @@ sqlparse @ file:///tmp/build/80754af9/sqlparse_1602184451250/work
 static3==0.7.0
 whitenoise==5.2.0
 wincertstore==0.2
+djangorestframework==3.11.2
