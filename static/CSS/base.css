@@ -1,0 +1,84 @@
+body{
+    color: #ffffff;
+    font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: 0;
+    font-weight: normal;
+    position: relative;
+    padding: 0 0 10px 0;
+    font-weight: normal;
+    line-height: 120% !important;
+    color: #1f1f1f;
+    margin: 0
+}
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+    opacity: .8
+}
+
+.navbar {
+    background: #fff !important;
+    color: red;
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: all .7s ease 0s;
+    -webkit-transition: all .7s ease 0s;
+    -moz-transition: all .7s ease 0s;
+    -o-transition: all .7s ease 0s;
+    -ms-transition: all .7s ease 0s;
+    padding: 14px 15px;
+    font-weight: initial ;
+
+}
+
+    .navbar img {
+        margin-bottom: 25px;
+        margin-left: 50px;
+        transition: all .5s ease 0s;
+        -webkit-transition: all .5s ease 0s;
+        -moz-transition: all .5s ease 0s;
+        -o-transition: all .5s ease 0s;
+        -ms-transition: all .5s ease 0s;
+    }
+    .navbar-nav{
+        margin-left:300px;
+    }
+
+    .navbar a{
+        font-size: 20px;
+        color:gray;
+        text-transform: uppercase;
+        transition: all .7s ease 0s;
+        -webkit-transition: all .7s ease 0s;
+        -moz-transition: all .7s ease 0s;
+        -o-transition: all .7s ease 0s;
+        -ms-transition: all .7s ease 0s;
+        padding: 14px 15px;
+        font-weight: initial ;
+
+    }
+    .navbar-nav a:hover {
+        color: #42b3e5 !important;
+    }
+
+    .navbar-nav a.active {
+        color: #42b3e5 !important;
+    }
+
+    .navbar-toggler {
+        border-color: #fff;
+        margin-top: 4px;}
