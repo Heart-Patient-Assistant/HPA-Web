@@ -15,12 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from . import views
+from django.views.generic import TemplateView
 
+from . import views
+from django.contrib import admin
+from django.urls import path, include # new
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",views.home,name='home'),
+path('', TemplateView.as_view(template_name='home.html'),
+name='home'),
     path('users/',include("HPA_Apps.users.urls")),
     path('services/',include("HPA_Apps.services.urls")),
     path('blogs/',include("HPA_Apps.blogs.urls")),
