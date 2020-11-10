@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.utils import timezone
+from django.urls import reverse
+from taggit.managers import TaggableManager
 # Create your models here.
 
 class Post(models.Model):
@@ -7,8 +9,8 @@ class Post(models.Model):
         ('draft','Draft'),
         ('published','Published'),
     )
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200,unique_for_date='publish')
+    title = models.CharField(max_length=200,default="NoName")
+    slug = models.SlugField(max_length=200,unique_for_date='publish',default="NoSlug")
     author = models.ForeignKey("users.CustomUser",on_delete=models.CASCADE)
     content = models.TextField(blank=True,null=True)
     publish = models.DateTimeField(default=timezone.now)
