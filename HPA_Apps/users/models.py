@@ -3,8 +3,10 @@ from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
 
 
 ############# ModelManager
@@ -16,6 +18,8 @@ class CustomUserManager(BaseUserManager):
 
         if not email:
             raise ValueError(_('The Email must be set'))
+        if not password:
+            raise ValueError(_('The Password must be set'))
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -39,11 +43,18 @@ class CustomUserManager(BaseUserManager):
 
 ############# User Model
 class CustomUser(AbstractBaseUser,PermissionsMixin):
+    class Types(models.TextChoices):
+        DOCTOR = "DOCTOR", "Doctor"
+        PATIENT = "PATIENT", "Patient"
+
+    type = models.CharField(_('Type'), max_length=50,choices= Types.choices, default=Types.PATIENT)
+
     email = models.EmailField(_('email address'),unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     is_active = models.BooleanField(_('active'),default=True)
-    is_staff=models.BooleanField(_('is staff'),default=False)
+    is_staff = models.BooleanField(_('is staff'),default=False)
+    admin = models.BooleanField(_('is admin'),default=False)
     date_joined = models.DateTimeField(_('date joined'),default=timezone.now)
 
     USERNAME_FIELD = 'email'
@@ -73,6 +84,10 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
         """Send an E-mail to the user"""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+@receiver(post_save,sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 ############# User Profile
 class Profile(models.Model):
@@ -85,7 +100,7 @@ class Profile(models.Model):
 
 
 ########### Receiver to create/update when create/update user instance
-@receiver(post_save,sender=CustomUser)
+@receiver(post_save,sender=settings.AUTH_USER_MODEL)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
@@ -94,21 +109,35 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+# Without Manager filtering users by their type doesn't work all users have both types
+############# ModelManager 2
+class PatientManager(models.Manager):
+    def get_queryset(self,*args,**kwargs):
+        return super().get_queryset(*args,**kwargs).filter(type=User.Types.PATIENT)
 
+class DoctorManager(models.Manager):
+    def get_queryset(self,*args,**kwargs):
+        return super().get_queryset(*args,**kwargs).filter(type=User.Types.DOCTOR)
 
 ############# User Model 2
 class Patient(CustomUser):
-    objects = CustomUserManager()
+    objects = PatientManager()
     class Meta:
         proxy = True
         #ordering = ('..')
 
-    #def some_function(self):
+    def save(self,*args,**kwargs):
+        if not self.pk:
+            self.type = User.Types.PATIENT
+        return super().save(*args,**kwargs)
 
 class Doctor(CustomUser):
-    objects = CustomUserManager()
+    objects = DoctorManager()
     class Meta:
         proxy = True
         #ordering = ('..')
 
-    #def some_function(self):
+    def save(self,*args,**kwargs):
+        if not self.pk:
+            self.type = User.Types.DOCTOR
+        return super().save(*args,**kwargs)

@@ -1,16 +1,17 @@
-asgiref @ file:///tmp/build/80754af9/asgiref_1602513567813/work
-certifi==2020.6.20
-dj-database-url==0.5.0
 dj-static==0.0.6
 Django==3.0.3
+django-crispy-forms==1.9.2
+django-taggit==1.2.0
+djangorestframework==3.11.2
 docopt==0.6.2
 gitignore==0.0.8
 gunicorn==20.0.4
-psycopg2==2.8.6
-pytz==2020.1
-sqlparse @ file:///tmp/build/80754af9/sqlparse_1602184451250/work
 static3==0.7.0
 whitenoise==5.2.0
 wincertstore==0.2
+<<<<<<< HEAD
 djangorestframework==3.11.2
 django-taggit
+=======
+dj-database-url==0.5.0
+>>>>>>> 4c0e07bed14186acdf2f886789bf41f52845a520
