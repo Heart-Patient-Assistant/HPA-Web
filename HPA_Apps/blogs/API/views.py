@@ -1,6 +1,6 @@
 from rest_framework import generics
-from HPA_Apps.blogs.API.serializers import PostListSerializer,PostCreateUpdateSerializer,PostDetailSerializer
-from HPA_Apps.blogs.models import Post
+from .serializers import PostListSerializer,PostCreateUpdateSerializer,PostDetailSerializer
+from ..models import Post
 from django.db.models import Q
 from rest_framework.filters import (
         SearchFilter,

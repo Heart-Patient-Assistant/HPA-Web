@@ -44,13 +44,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'crispy_forms',
-<<<<<<< HEAD
-    'taggit_autocomplete_modified',
-     'pagedown',
-=======
+    #'taggit_autocomplete_modified',
+    #'pagedown',
     'taggit',
 
->>>>>>> 4c0e07bed14186acdf2f886789bf41f52845a520
     # local apps
      'HPA_Apps.users',
      'HPA_Apps.services',
