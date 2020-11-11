@@ -1,5 +1,8 @@
 from django.db import models
-
+from django.utils import timezone
+from django.urls import reverse
+from taggit.managers import TaggableManager
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Post(models.Model):
@@ -7,8 +10,9 @@ class Post(models.Model):
         ('draft','Draft'),
         ('published','Published'),
     )
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200,unique_for_date='publish')
+    title = models.CharField(max_length=200,null=True)
+    slug = models.SlugField(max_length=250,
+                            unique_for_date='publish',null=True)
     author = models.ForeignKey("users.CustomUser",on_delete=models.CASCADE)
     content = models.TextField(blank=True,null=True)
     publish = models.DateTimeField(default=timezone.now)
@@ -16,7 +20,8 @@ class Post(models.Model):
     upadted = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10,choices=STATUS_CHOICES,default='draft')
     image = models.FileField(upload_to='images/',blank=True,null=True)
-    tags = TaggableManager()
+    draft = models.BooleanField(default=False)
+
 
     class Meta:
         ordering = ('-publish',)

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'crispy_forms',
-
+    'taggit_autocomplete_modified',
+     'pagedown',
     # local apps
      'HPA_Apps.users',
      'HPA_Apps.services',
