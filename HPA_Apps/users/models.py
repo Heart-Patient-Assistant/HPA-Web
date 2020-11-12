@@ -113,11 +113,11 @@ def save_user_profile(sender, instance, **kwargs):
 ############# ModelManager 2
 class PatientManager(models.Manager):
     def get_queryset(self,*args,**kwargs):
-        return super().get_queryset(*args,**kwargs).filter(type=User.Types.PATIENT)
+        return super().get_queryset(*args,**kwargs).filter(type=CustomUser.Types.PATIENT)
 
 class DoctorManager(models.Manager):
     def get_queryset(self,*args,**kwargs):
-        return super().get_queryset(*args,**kwargs).filter(type=User.Types.DOCTOR)
+        return super().get_queryset(*args,**kwargs).filter(type=CustomUser.Types.DOCTOR)
 
 ############# User Model 2
 class Patient(CustomUser):
