@@ -128,7 +128,7 @@ class Patient(CustomUser):
 
     def save(self,*args,**kwargs):
         if not self.pk:
-            self.type = User.Types.PATIENT
+            self.type = CustomUser.Types.PATIENT
         return super().save(*args,**kwargs)
 
 class Doctor(CustomUser):
@@ -139,5 +139,5 @@ class Doctor(CustomUser):
 
     def save(self,*args,**kwargs):
         if not self.pk:
-            self.type = User.Types.DOCTOR
+            self.type = CustomUser.Types.DOCTOR
         return super().save(*args,**kwargs)
