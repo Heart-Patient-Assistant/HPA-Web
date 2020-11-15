@@ -2,11 +2,16 @@ from rest_framework import serializers
 from django.db.models import fields
 from rest_framework import serializers
 
-from HPA_Apps.users.models import CustomUser,Profile,Doctor
+from HPA_Apps.users.models import CustomUser,Patient,Doctor
 
 class CreateAccountSerializer(serializers.ModelSerializer):
+    choices=[('PATIENT','patient'),
+             ('DOCTOR','doctor'),]
+
+
+
     password2=serializers.CharField(style={"type":'password'})
-    type=serializers.CharField(max_length=20, required=False) #>>> do or patient
+    type=serializers.ChoiceField(choices=choices , default='PATIENT', help_text='PATIENT or DOCTOR') #>>> do or patient
     
     class Meta:
         model=CustomUser
@@ -14,16 +19,11 @@ class CreateAccountSerializer(serializers.ModelSerializer):
 
 
     def save(self):
-        
-        #if self.validated_data['email']=='patient' 
-        account=CustomUser(email=self.validated_data['email'],
+
+        account = CustomUser.objects.create(email=self.validated_data['email'],
                            first_name=self.validated_data['first_name'],
-                           last_name=self.validated_data['last_name'])
-        
-        #if self.validated_data['email']=='doctor' 
-            #account=Doctor(email=self.validated_data['email'],
-            #               first_name=self.validated_data['first_name'],
-            #               last_name=self.validated_data['last_name'])
+                           last_name=self.validated_data['last_name'],
+                           type=self.validated_data['type'])
         
         password=self.validated_data['password']
         password2=self.validated_data['password2']
@@ -35,4 +35,4 @@ class CreateAccountSerializer(serializers.ModelSerializer):
           
         account.save()
 
-        return account
+        return account , self.validated_data['type']
