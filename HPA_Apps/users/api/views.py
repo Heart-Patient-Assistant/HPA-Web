@@ -13,10 +13,12 @@ def createaccount(request):
     data={}
     
     if serializer.is_valid():
-        account=serializer.save()
+        account,type=serializer.save()    #serializer's save function return bothbaccount object, string representation of account type
         
         data['created']='account successfully created'
         data['email']=account.email
+        
+        data['type']=type
 
         token=Token.objects.get(user=account).key
         data['token']=token
