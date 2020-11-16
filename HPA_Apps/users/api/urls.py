@@ -13,4 +13,5 @@ app_name = "users_api"
 urlpatterns = [
     path('signup/',views.createaccount,name='createaccount'),
     path('gettoken/',obtain_auth_token,name='gettoken'),
+    path('editprofile/',views.editprofile,name='edit')
 ]
