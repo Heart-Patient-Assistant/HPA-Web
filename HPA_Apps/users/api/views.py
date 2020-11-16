@@ -1,10 +1,14 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view,permission_classes
-from .serializers import CreateAccountSerializer
+from .serializers import CreateAccountSerializer,EditingProfileSerializer
 from rest_framework.authtoken.models import Token
-from rest_framework import permissions
+from rest_framework import permissions,serializers
 
 
+
+from HPA_Apps.users.models import Profile
+
+#creating new account and send back the token 
 @api_view(['POST','GET'])
 @permission_classes([permissions.AllowAny])
 def createaccount(request):
@@ -25,5 +29,29 @@ def createaccount(request):
     
     else:
         data=serializer.errors  #returning erros in serializer class
+    
+    return Response(data)
+
+#updating profile 
+
+@api_view(['POST','GET'])
+@permission_classes([permissions.IsAuthenticatedOrReadOnly])
+def editprofile(request):
+    data={}
+    token=request.auth
+    serializer=EditingProfileSerializer(data=request.data)
+
+    if request.method=='POST':
+        if serializer.is_valid():
+            
+            serializer.save(token)
+            data['updated']='profile successfully updated'
+
+        else:
+    
+            raise serializers.ValidationError({"error in data":"please chech data input formate to be 'y-m-d' "})
+    else:
+        data['Location']="input your location"
+        data['birth_date']="input your birth data y-m-d "
     
     return Response(data)
