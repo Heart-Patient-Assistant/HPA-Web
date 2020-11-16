@@ -1,8 +1,7 @@
 from rest_framework import serializers
-from django.db.models import fields
-from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 
-from HPA_Apps.users.models import CustomUser,Patient,Doctor
+from HPA_Apps.users.models import CustomUser,Patient,Doctor,Profile
 
 class CreateAccountSerializer(serializers.ModelSerializer):
     choices=[('PATIENT','patient'),
@@ -36,3 +35,27 @@ class CreateAccountSerializer(serializers.ModelSerializer):
         account.save()
 
         return account , self.validated_data['type']
+
+#profile serializer
+
+class EditingProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Profile
+        fields=('Location','birth_date',)
+
+    def save(self,token):
+        
+
+        user = Token.objects.get(key=token).user
+        profile=Profile.objects.get(user=user)
+
+        location =self.validated_data["Location"]
+        birth_date=self.validated_data["birth_date"]
+        
+        profile.Location=location
+        profile.birth_date=birth_date
+        
+        profile.save()
+
+
+
