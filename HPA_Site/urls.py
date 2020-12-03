@@ -19,8 +19,8 @@ from django.contrib import admin
 from django.urls import path, include # new
 from django.views.generic.base import TemplateView
 from django.conf.urls import url
-
-
+from django.conf import settings
+from django.conf.urls.static import static
 api_urlpatterns = [
     path('users/',include("HPA_Apps.users.api.urls",namespace="users_api")),
     path('blog/',include("HPA_Apps.blogs.api.urls",namespace="blogs_api")),
@@ -35,4 +35,4 @@ urlpatterns = [
     path('blogs/',include("HPA_Apps.blogs.urls",namespace="blogs")),
     path('api/',include(api_urlpatterns)),
 
-]
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) # enable browsering pics
