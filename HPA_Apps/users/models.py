@@ -101,7 +101,7 @@ class Profile(models.Model):
     #phone_number= ..
     birth_date = models.DateField(null=True,blank=True)
     Location = models.CharField(max_length=30,blank=True)
-    #profile= models.ImageField(null=True,bland=True)
+    profile_pic= models.ImageField(null=True,upload_to='media/uploads/')
     #doctor_resp = ..
 
 
@@ -147,3 +147,37 @@ class Doctor(CustomUser):
         if not self.pk:
             self.type = CustomUser.Types.DOCTOR
         return super().save(*args,**kwargs)
+
+
+class Feedback(models.Model):
+    #https://www.merixstudio.com/blog/django-models-declaring-list-available-choices-right-way/
+    #implementing choices has alot of ways 
+    # this is the simplest one handling what we need 
+    feedback_choice=(
+        ("suggest",_("SUGGEST")),
+        ("compliment",_("COMPLIMENT")),
+        ("complaint",_("COMPLAINT")),
+    )
+    rate_choice=(
+        ("verybad",_("Very Bad")),
+        ("notbad",_("Not Bad")),
+        (("good"),_("Good")),
+        ("verygood",_("very good")),
+        ("excellent",_("Excellent")),
+    )
+
+    feedback_category=models.CharField(
+        _("Feedback Category"),
+        choices=feedback_choice,
+        max_length=50,blank=True)
+
+
+    rate=models.CharField(_("Rate us"),
+        max_length=50,
+        choices=rate_choice)
+    
+    
+    feedback_message=models.TextField(
+        _("Message"),
+        max_length=250,
+        blank=True)    
