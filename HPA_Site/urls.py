@@ -34,5 +34,7 @@ urlpatterns = [
     path('services/',include("HPA_Apps.services.urls")),
     path('blogs/',include("HPA_Apps.blogs.urls",namespace="blogs")),
     path('api/',include(api_urlpatterns)),
+    path('feedback/',include("HPA_Apps.feedback.urls",namespace="feedback")),
+
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) # enable browsering pics
