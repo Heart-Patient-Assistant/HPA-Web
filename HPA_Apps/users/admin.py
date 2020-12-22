@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import CustomUser,Patient,Doctor
+from .models import CustomUser,Patient,Doctor,Profile,Feedback
 from .forms import CustomUserCreationForm,CustomUserChangeForm
 
 # Register your models here.
@@ -29,6 +29,9 @@ class CustomUserAdmin(UserAdmin):
 class PatientAdmin(CustomUserAdmin):
     readonly_fields = ('type',)
 
-@admin.register(Doctor)
+@admin.register(Doctor) 
 class DoctorAdmin(CustomUserAdmin):
     readonly_fields = ('type',)
+
+admin.site.register(Profile)
+admin.site.register(Feedback)
