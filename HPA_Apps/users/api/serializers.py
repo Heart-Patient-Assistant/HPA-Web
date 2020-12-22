@@ -41,7 +41,7 @@ class CreateAccountSerializer(serializers.ModelSerializer):
 class EditingProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model=Profile
-        fields=('Location','birth_date',)
+        fields=('Location','birth_date','profile_pic')
 
     def save(self,token):
         
@@ -51,11 +51,14 @@ class EditingProfileSerializer(serializers.ModelSerializer):
 
         location =self.validated_data["Location"]
         birth_date=self.validated_data["birth_date"]
+       
+        if 'profile_pic' in self.validated_data.keys():
+            profile_pic=self.validated_data['profile_pic']
+            profile.profile_pic=profile_pic
         
         profile.Location=location
         profile.birth_date=birth_date
         
+        
         profile.save()
-
-
 
