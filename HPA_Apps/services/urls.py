@@ -1,4 +1,6 @@
 from django.urls import path 
-urlpatterns = [
-    
+from . import views
+app_name='services'
+urlpatterns =[
+path('getprediction/',views.getPrediction,name='getprediction')
 ]
