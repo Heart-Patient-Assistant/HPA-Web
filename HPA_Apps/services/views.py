@@ -11,7 +11,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 # Create your views here.
 @api_view(['POST','GET'])
 @permission_classes([permissions.AllowAny])
-def getPrediction(request): 
+def getPrediction(request):     
     #unpacking
     serializer=serializers.MLpredictionserializer(data=request.data)
     response={}

@@ -103,6 +103,7 @@ class Profile(models.Model):
     Location = models.CharField(max_length=30,blank=True)
     profile_pic= models.ImageField(null=True,upload_to='media/uploads/')
     #doctor_resp = ..
+#   medical_records=models.OneToOneField(MedicalRecord,on_delete=models.CASCADE)
 
 
 ########### Receiver to create/update when create/update user instance
@@ -180,4 +181,20 @@ class Feedback(models.Model):
     feedback_message=models.TextField(
         _("Message"),
         max_length=250,
-        blank=True)    
+        blank=True)  
+
+class MedicalRecords(models.Model):
+    age=models.IntegerField(verbose_name="Age")
+    sex=models.IntegerField(verbose_name="sex")
+    cp=models.IntegerField(verbose_name="chest pain type")
+    trestbps=models.IntegerField(verbose_name="Age")
+    chol=models.IntegerField(verbose_name="cholesterol")
+    fbs=models.IntegerField(verbose_name="fasting blood sugar level")
+    restecg=models.IntegerField(verbose_name="resting electrocardiographic")
+    thalach=models.IntegerField(verbose_name="maximum heart rate achieved")
+    exang=models.IntegerField(verbose_name="exercise induced angina")
+    oldpeak=models.IntegerField(verbose_name="ST depression")
+    sloping=models.IntegerField(verbose_name="Sloping")
+    ca=models.IntegerField(verbose_name="No major vessels colored")
+    thal=models.IntegerField(verbose_name="thallium stress")
+

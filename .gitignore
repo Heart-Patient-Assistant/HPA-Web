@@ -1,0 +1,12 @@
+HPA_Site/__pycache__/**
+HPA_Apps/users/migrations/**
+HPA_Apps/users/api/__pycache__/**
+HPA_Apps/users/__pycache__/**
+HPA_Apps/services/__pycache__/**
+HPA_Apps/feedback/__pycache__/**
+HPA_Apps/blogs/migrations/__pycache__/**
+HPA_Apps/blogs/api/__pycache__/**
+HPA_Apps/blogs/__pycache__/**
+HPA_Site/__pycache__/**
+HPA_Apps/users/migrations/__pycache__/**
+HPA_Apps/feedback/__pycache__/admin.cpython-38.pyc
