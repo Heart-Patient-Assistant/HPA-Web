@@ -15,21 +15,25 @@ def createaccount(request):
     serializer=CreateAccountSerializer(data=request.data)
     
     data={}
-    
-    if serializer.is_valid():
-        account,type=serializer.save()    #serializer's save function return bothbaccount object, string representation of account type
-        
-        data['created']='account successfully created'
-        data['email']=account.email
-        
-        data['type']=type
 
-        token=Token.objects.get(user=account).key
-        data['token']=token
-    
+    if request.method=='POST':
+        if serializer.is_valid():
+            account,acountType=serializer.save()    #serializer's save function return bothbaccount object, string representation of account type
+            
+            data['created']='account successfully created'
+            data['email']=account.email
+            
+            data['type']=acountType
+
+            token=Token.objects.get(user=account).key
+            data['token']=token
+        
+        else:
+            data=serializer.errors  #returning erros in serializer class
     else:
-        data=serializer.errors  #returning erros in serializer class
-    
+            data={
+                "required fields":['email','first_name','last_name','password','password2'," type: DOCTOR or PATIENT"]
+            }
     return Response(data)
 
 #updating profile 
