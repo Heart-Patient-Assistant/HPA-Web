@@ -10,4 +10,5 @@ router.register('profile',views.CustomUserViewSet)
 urlpatterns =[
     path('',include(router.urls)),
     path('login',views.CustomUserLoginView.as_view()),
+    path('upladmedicalrecord',views.UploadMedicalData.as_view())
 ]
