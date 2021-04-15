@@ -3,5 +3,6 @@ from django.urls import path
 from . import views
 app_name='feedback'
 urlpatterns =[
-path('givefeedback/',views.giveFeedback,name='givefeedback')
+path('givefeedbackapi/',views.giveFeedbackApi,name='givefeedbackApi'),
+path('givefeedback/',views.giveFeedback.as_view(),name='givefeedback')
 ]
