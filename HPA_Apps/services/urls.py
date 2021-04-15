@@ -1,6 +1,9 @@
 from django.urls import path 
 from . import views
+from django.views.generic.base import TemplateView
 app_name='services'
 urlpatterns =[
-path('getprediction/',views.getPrediction,name='getprediction')
+path('getpredictionapi/',views.getPredictionApi,name='getpredictionApi'),
+path('getprediction/',views.getPrediction,name='getprediction'),
+path('<str:result>', TemplateView.as_view(template_name='home.html'),name='getresult'),
 ]
