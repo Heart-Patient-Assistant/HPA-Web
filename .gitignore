@@ -10,3 +10,5 @@ HPA_Apps/blogs/__pycache__/**
 HPA_Site/__pycache__/**
 HPA_Apps/users/migrations/__pycache__/**
 HPA_Apps/feedback/__pycache__/admin.cpython-38.pyc
+**/__pycache__/
+*.html
