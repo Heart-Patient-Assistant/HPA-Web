@@ -98,12 +98,13 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 ############# User Profile
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
+    medicalrecord=models.OneToOneField("MedicalRecords",null=True,on_delete=models.CASCADE)
     #phone_number= ..
     birth_date = models.DateField(null=True,blank=True)
     Location = models.CharField(max_length=30,blank=True)
     profile_pic= models.ImageField(null=True,upload_to='media/uploads/')
     #doctor_resp = ..
-#   medical_records=models.OneToOneField(MedicalRecord,on_delete=models.CASCADE)
+
 
 
 ########### Receiver to create/update when create/update user instance
@@ -166,35 +167,38 @@ class Feedback(models.Model):
         ("verygood",_("very good")),
         ("excellent",_("Excellent")),
     )
-
+    rate=models.CharField(_("Rate us"),
+        max_length=50,
+        choices=rate_choice)
+    
     feedback_category=models.CharField(
         _("Feedback Category"),
         choices=feedback_choice,
         max_length=50,blank=True)
 
-
-    rate=models.CharField(_("Rate us"),
-        max_length=50,
-        choices=rate_choice)
-    
-    
     feedback_message=models.TextField(
         _("Message"),
         max_length=250,
         blank=True)  
 
 class MedicalRecords(models.Model):
-    age=models.IntegerField(verbose_name="Age")
-    sex=models.IntegerField(verbose_name="sex")
-    cp=models.IntegerField(verbose_name="chest pain type")
-    trestbps=models.IntegerField(verbose_name="Age")
-    chol=models.IntegerField(verbose_name="cholesterol")
-    fbs=models.IntegerField(verbose_name="fasting blood sugar level")
-    restecg=models.IntegerField(verbose_name="resting electrocardiographic")
-    thalach=models.IntegerField(verbose_name="maximum heart rate achieved")
-    exang=models.IntegerField(verbose_name="exercise induced angina")
-    oldpeak=models.IntegerField(verbose_name="ST depression")
-    sloping=models.IntegerField(verbose_name="Sloping")
-    ca=models.IntegerField(verbose_name="No major vessels colored")
-    thal=models.IntegerField(verbose_name="thallium stress")
+    age      =models.IntegerField(verbose_name="Age")
+    sex      =models.IntegerField(verbose_name="sex")
+    cp       =models.IntegerField(verbose_name="chest pain type")
+    trestbps =models.IntegerField(verbose_name="Age")
+    chol     =models.IntegerField(verbose_name="cholesterol")
+    fbs      =models.IntegerField(verbose_name="fasting blood sugar level")
+    restecg  =models.IntegerField(verbose_name="resting electrocardiographic")
+    thalach  =models.IntegerField(verbose_name="maximum heart rate achieved")
+    exang    =models.IntegerField(verbose_name="exercise induced angina")
+    oldpeak  =models.IntegerField(verbose_name="ST depression")
+    sloping  =models.IntegerField(verbose_name="Sloping")
+    ca       =models.IntegerField(verbose_name="No major vessels colored")
+    thal     =models.IntegerField(verbose_name="thallium stress")
 
+    def check_health(self):
+        pass
+    
+    def get_queryset(self):
+        return[self.age,self.sex,self.cp,self.trestbps,self.chol,self.fbs,
+        self.restecg,self.thalach,self.exang,self.oldpeak,self.sloping,self.ca,self.thal]
