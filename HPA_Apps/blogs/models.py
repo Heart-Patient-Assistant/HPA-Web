@@ -34,6 +34,7 @@ class Post(models.Model):
 
 ## Name should be edited to take the name of the person
 class Comment(models.Model):
+    author = models.ForeignKey("users.CustomUser", on_delete=models.CASCADE)
     post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
     name = models.CharField(max_length=80)
     email = models.EmailField()

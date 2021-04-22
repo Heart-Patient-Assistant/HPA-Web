@@ -2,25 +2,29 @@ from rest_framework.serializers import (
     ModelSerializer,
     SerializerMethodField
     )
-from HPA_Apps.blogs.models import Post
+from rest_framework import serializers
+from HPA_Apps.blogs.models import Post,Comment
 
 
 
 class PostCreateUpdateSerializer(ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title','slug', 'content', 'created','status','image')
+        fields = ('id', 'author', 'title',
+                  # 'slug',
+                  'content', 'created','status','image')
 
 
-class PostListSerializer(ModelSerializer):
+class PostListSerializer(serializers.HyperlinkedModelSerializer):
     author = SerializerMethodField()
     class Meta:
         model = Post
         fields = [
             'author',
-            'slug',
+            # 'slug',
             'title',
             'publish',
+            'content'
         ]
     def get_author (self, obj,):
         return str(obj.author.first_name)
@@ -43,6 +47,31 @@ class PostDetailSerializer(ModelSerializer):
         except:
             image = None
         return image
+
+
+
+class CommentSerializer(ModelSerializer):
+    # reply_count = SerializerMethodField()
+    author = SerializerMethodField()
+    class Meta:
+        model = Comment
+        fields = [
+            'id',
+            'author',
+            # 'parent',
+            'body',
+            # 'reply_count',
+            'created',
+        ]
+    # def get_reply_count(self, obj):
+    #     if obj.is_parent:
+    #         return obj.children().count()
+    #     return 0
+
+    def get_author (self, obj,):
+        return str(obj.author.first_name)
+
+
 
 
 
