@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{%block title%}
+  Create New Category
+{%endblock title%}
+
+{% block content %}
+  <h1>New Category</h1>
+  <div class="form-group"></div>
+    <form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="" value="Save" class= "btn btn-secondary">
+    </form>
+  </div>
+{% endblock content %}
