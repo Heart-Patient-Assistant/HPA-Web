@@ -37,7 +37,7 @@ def LikeView(request, pk):
 
 class BlogListView(ListView):
     model = Post
-    template_name = "home.html"
+    template_name = "posts.html"
     # cats = Category.objects.all()
     ordering = ["-id"]
 
