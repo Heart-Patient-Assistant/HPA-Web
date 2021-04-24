@@ -1,50 +1,66 @@
+from HPA_Apps.users.models import User
 from django.db import models
-from django.utils import timezone
 from django.urls import reverse
-from taggit.managers import TaggableManager
-from django.contrib.auth.models import User
+
+# from django.contrib.auth.models import User
+
+#  from datetime import datetime, date
+
 # Create your models here.
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("home")
+
+
+# class Profile(models.Model):
+#     user = models.OneToOneField(User,null=True,on_delete=models.CASCADE)
+#     bio = models.TextField()
+#     profile_pic = models.ImageField(null=True,blank=True, upload_to='images/profile/')
+#     website_url = models.CharField(max_length=255,null=True,blank=True)
+
+#     def __str__(self):
+#         return str(self.user)
+
+#     def get_absolute_url(self):
+#         return reverse('home')
+
+
 class Post(models.Model):
-    STATUS_CHOICES = (
-        ('draft','Draft'),
-        ('published','Published'),
+    title = models.CharField(max_length=255)
+    header_image = models.ImageField(null=True, blank=True, upload_to="images/")
+    title_tag = models.CharField(max_length=255, null=True, blank=True)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
     )
-    title = models.CharField(max_length=200,null=True)
-    slug = models.SlugField(max_length=250,
-                            unique_for_date='publish',null=True)
-    author = models.ForeignKey("users.CustomUser",on_delete=models.CASCADE)
-    content = models.TextField(blank=True,null=True)
-    publish = models.DateTimeField(default=timezone.now)
-    created = models.DateTimeField(auto_now_add=True)
-    upadted = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10,choices=STATUS_CHOICES,default='draft')
-    image = models.FileField(upload_to='images/',blank=True,null=True)
-    draft = models.BooleanField(default=False)
+    body = models.TextField()
+    post_date = models.DateField(auto_now_add=True)
+    category = models.CharField(max_length=255, default="not_categorized")
+    likes = models.ManyToManyField(User, related_name="blog_post", blank=True)
 
-
-    class Meta:
-        ordering = ('-publish',)
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail',args=[self.publish.year,self.publish.month,self.publish.day,self.slug])
+        return reverse("home")
 
-## Name should be edited to take the name of the person
+
 class Comment(models.Model):
-    author = models.ForeignKey("users.CustomUser", on_delete=models.CASCADE)
-    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    name = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    # name = models.CharField(max_length=255)
     body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
-
-    class Meta:
-        ordering = ('created',)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Comment by {self.name} on {self.post}'
+        return "%s - %s" % (self.post, self.name)

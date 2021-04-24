@@ -1,76 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-<!DOCTYPE html>
-{% load static %}
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>{% block title %}Heart Patients{% endblock title %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+      {%block title%}
+      {%endblock title%}
+    </title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'home' %}">Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
- <link rel="stylesheet" href="{% static 'css/base.css' %}">
-</head>
-<body>
- 	<!-- header section -->
-      <header>
-          <div class="top-header">
-        <nav class="navbar navbar-expand-lg" style=" width: 100%; z-index: 99999; ">
-          <a class="navbar-brand" href="index.html"><img src="{% static 'img/logo.png' %}" alt="image"  class="img-responsive logo"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blogs:post_new' %}">New Blog Post</a>
+          </li>
+          <li>
+            <a class="nav-link" href="{% url 'blogs:category_new' %}">Add new category</a>
+          </li>
+          {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for item in cat_menu %}
+                <a class="dropdown-item" href="{% url 'blogs:category' item|slugify %}">{{item}}</a>
+              {% endfor %}
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{user.first_name}} {{user.last_name}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'users:edit_profile' %}">Edit Settings</a>
+              {% if user.profile.id %}
+                <a class="dropdown-item" href="{% url 'users:edit_profile_page' user.profile.id %}">Edit Profile Page</a>
+                <a class="dropdown-item" href="{% url 'users:show_profile' user.profile.id %}">Show Profile Page</a>
+              {% else %}
+                <a class="dropdown-item" href="{% url 'create_profile_page'%}">Create Profile Page</a>
+              {% endif %}
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href ="{% url 'logout' %}">Log Out</a>
+            </div>
+          </li>
+          {% else %}
+          <li>
+            <p><a href="{% url 'login'%}" class="nav-link">Log In</a></p>
+          </li>
+          <li>
+            <p><a class="nav-link" href ="{% url 'users:signup' %}">Sign Up</a></p>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
 
-          </button>
+    {% block content %}
+    {% endblock content %}
 
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-               {% if user.is_authenticated %}
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li><a class="nav-link active" href="#home">Home</a></li>
-                              <li><a class="nav-link" href="#about">About Us</a></li>
-                              <li><a class="nav-link" href="#service">Services</a></li>
-                              <li><a class="nav-link" href="#team">Doctor</a></li>
-                              <li><a class="nav-link" href="#blog">Blog</a></li>
-                            <li><a class="nav-link" href="#contact">Contact</a></li>
-                <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-{{ user.username }}
-</a>
-            </ul>
-               {% else %}
-        <form class="form-inline ml-auto">
-           <ul class="navbar-nav">
-                        <li><a class="nav-link active" href="#home">Home</a></li>
-                        <li><a class="nav-link" href="#about">About Us</a></li>
-                        <li><a class="nav-link" href="#service">Services</a></li>
-						            <li><a class="nav-link" href="#team">Doctor</a></li>
-                        <li><a class="nav-link" href="#blog">Blog</a></li>
-						          <li><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item">
-          <a href="" class="btn btn-outline-secondary">
-          Log In</a>
-          <a href="" class="btn btn-primary ml-2">
-          Sign up</a>
-                        </li>
-           </ul>
-        </form>
-      {% endif %}
-          </div>
-          </nav>
-        </div>
-      </header>
-  <!-- header section -->
-  <main>
-    <div class="container">
-      {% block content %}
-      {% endblock content %}
-    </div>
-  </main>
+    <!-- Optional JavaScript; choose one of the two! -->
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+  </body>
 </html>
 

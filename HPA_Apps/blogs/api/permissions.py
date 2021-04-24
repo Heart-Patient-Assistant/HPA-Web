@@ -2,7 +2,7 @@ from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
 class IsOwnerOrReadOnly(BasePermission):
-    message = 'You must be the owner of this object.'
+    message = "You must be the owner of this object."
 
     def has_object_permission(self, request, view, obj):
 

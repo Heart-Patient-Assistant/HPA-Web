@@ -14,27 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from . import views
+# from . import views
 from django.contrib import admin
-from django.urls import path, include # new
+from django.urls import path, include  # new
 from django.views.generic.base import TemplateView
-from django.conf.urls import url
+
+# from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
+
 api_urlpatterns = [
-    path('users/',include("HPA_Apps.users.api.urls",namespace="users_api")),
-    path('blog/',include("HPA_Apps.blogs.api.urls",namespace="blogs_api")),
+    path("users/", include("HPA_Apps.users.api.urls", namespace="users_api")),
+    path("blog/", include("HPA_Apps.blogs.api.urls", namespace="blogs_api")),
 ]
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='home.html'),name='home'),
-    path('users/',include("HPA_Apps.users.urls",namespace="users")),
-    path('services/',include("HPA_Apps.services.urls")),
-    path('blogs/',include("HPA_Apps.blogs.urls",namespace="blogs")),
-    path('api/',include(api_urlpatterns)),
-    path('feedback/',include("HPA_Apps.feedback.urls",namespace="feedback")),
-
-
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) # enable browsering pics
+    path("admin/", admin.site.urls),
+    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path("users/", include("django.contrib.auth.urls")),
+    path("users/", include("HPA_Apps.users.urls", namespace="users")),
+    path("services/", include("HPA_Apps.services.urls")),
+    path("blogs/", include("HPA_Apps.blogs.urls", namespace="blogs")),
+    path("api/", include(api_urlpatterns)),
+    path("feedback/", include("HPA_Apps.feedback.urls", namespace="feedback")),
+] + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)  # enable browsering pics

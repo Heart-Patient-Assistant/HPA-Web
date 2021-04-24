@@ -1,20 +1,52 @@
-from django.contrib import admin
-from .models import Post,Comment
+from django import forms
+from .models import Post, Category, Comment
 
-# Register your models here.
+# to hard code choices
+# choices = [('sport','sport'),('cars','cars'),('Big Choice','Big Choice')]
+choices = Category.objects.all().values_list("name", "name")
+choices_list = []
+for item in choices:
+    choices_list.append(item)
 
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title','slug','author','publish','status')
-    list_filter = ('status','created','publish','author')
-    search_fields = ('title','body')
-    prepopulated_fields = {'slug':('title',)}
-    raw_id_fields = ('author',)
-    date_hierarchy = 'publish'
-    ordering = ('status','publish')
 
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name','email','post','created','active')
-    list_filter = ('active','created','updated')
-    search_fields = ('name','email','body')
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ("title", "title_tag", "author", "category", "body", "header_image")
+
+        widgets = {
+            "title": forms.TextInput(attrs={"class": "form-control"}),
+            "title_tag": forms.TextInput(attrs={"class": "form-control"}),
+            "author": forms.Select(attrs={"class": "form-control"}),
+            "category": forms.Select(
+                choices=choices_list, attrs={"class": "form-control"}
+            ),
+            "body": forms.Textarea(
+                attrs={"class": "form-control", "rows": 4, "cols": 15}
+            ),
+        }
+
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ("title", "author", "body")
+
+        widgets = {
+            "title": forms.TextInput(attrs={"class": "form-control"}),
+            "author": forms.Select(attrs={"class": "form-control"}),
+            "body": forms.Textarea(attrs={"class": "form-control"}),
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("name", "body")
+
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "body": forms.Textarea(
+                attrs={"class": "form-control", "rows": 2, "cols": 10}
+            ),
+        }

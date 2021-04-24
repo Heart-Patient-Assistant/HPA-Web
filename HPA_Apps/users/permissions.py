@@ -1,9 +1,10 @@
 from rest_framework import permissions
 
+
 class UpdateOwnProfile(permissions.BasePermission):
     """Allow User to edit only their own profile"""
 
-    def has_object_permission(self,request,view,obj):
+    def has_object_permission(self, request, view, obj):
         """Check if user trying to edit their own profile"""
         if request.method in permissions.SAFE_METHODS:
             return True
