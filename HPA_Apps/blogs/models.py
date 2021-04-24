@@ -56,6 +56,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    # author = models.ForeignKey("users.CustomUser", on_delete=models.CASCADE)
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     name = models.ForeignKey("users.User", on_delete=models.CASCADE)
     # name = models.CharField(max_length=255)
