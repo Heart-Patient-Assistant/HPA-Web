@@ -1,15 +1,80 @@
 {% extends 'base.html' %}
-{%block title%}
+{% load static %}
+{% block title %}
   Blog
-{%endblock title%}
+{% endblock title %}
 
-{% block content %}
-  {% for post in object_list %}
-    <div class="post-entry">
+{% block body_content %}
+<main id="main">
+ <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+            <h2 style="text-align: center;">Blog</h2>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="blog" class="blog">
+    {% for post in object_list %}
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+            <article class="entry">
+
+            {% comment %} image to add in the post background {% endcomment %}
+              <div class="entry-img">
+                <img src="{{post.header_image.url}}" alt="" class="img-fluid">
+              </div>
+
+              {% comment %} header is post title and ref is the link to post detail {% endcomment %}
+              <h2 class="entry-title">
+                <a href="{% url 'blogs:post_detail' post.pk %}"><p>{{post.title}}</p></a>
+              </h2>
+
+              {% comment %} first list is the author and its link is the profile and second is the post_date {% endcomment %}
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html"><p>{{post.author}}</p></a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><p>{{post.post_date}}</p></a></li>
+                </ul>
+              </div>
+
+              {% comment %} post content {% endcomment %}
+              <div class="entry-content">
+                <p>
+                  {{post.body}}
+                </p>
+                <div class="read-more">
+                  <a href="{% url 'blogs:post_detail' post.pk %}">Read More</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry -->
+          </div>
+          </div>
+          {% endfor %}
+          <div class="blog-pagination" data-aos="fade-up">
+          <ul class="justify-content-center">
+            <li class="disabled"><i class="icofont-rounded-left"></i></li>
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
+          </ul>
+        </div>
+
+      </div>
+
+</section>
+</main>
+  {% comment %}
       <h2><a href="{% url 'blogs:post_detail' post.pk %}">{{post.title}}</a></h2>
       <a href="{% url 'blogs:category' post.category %}"><small>{{post.category|slugify}}</small></a> | <small>{{post.post_date}}</small>
-      <p>{{post.body}}</p>
-    </div>
-  {% endfor %}
+  {% endcomment %}
 
-{% endblock content %}
+{% endblock body_content %}
