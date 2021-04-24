@@ -76,7 +76,7 @@ class PostApiDetailView(viewsets.ModelViewSet):
                 data=request.data, context={"request": request}
             )
             serializer.is_valid(raise_exception=True)
-            serializer.save(author=self.request.user, post=post)
+            serializer.save(name=self.request.user, post=post)
             return Response(serializer.data)
 
     @action(detail=False, methods=["DELETE"])
