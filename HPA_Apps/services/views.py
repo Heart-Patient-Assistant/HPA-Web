@@ -71,6 +71,6 @@ def getPrediction(request):
                 reverse('services:getresult',
                 kwargs={'result':f'{response["prediction"]} -- {response["worry"] }'}))
 
-    return render(request,'post_form.html',{'form':MedicalRecordForm()})
+    return render(request,'prediction_form.html',{'form':MedicalRecordForm()})
   
     #
