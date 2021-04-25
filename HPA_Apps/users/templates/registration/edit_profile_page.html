@@ -3,10 +3,18 @@
   Edit Profile Page
 {%endblock title%}
 
-{% block content %}
-{% if user.is_authenticated %}
+{% block body_content %}
+<main id="main">
+ <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+            <h2 style="text-align: center;">Edit Profile Page</h2>
+          </div>
+        </div>
+      </div>
+    {% if user.is_authenticated %}
     {% if user.id == profile.user.id %}
-        <h1>Edit Profile Page</h1>
         <div class="form-group"></div>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -20,4 +28,6 @@
 {% else %}
   You're not allowed to perform this action
 {% endif %}
-{% endblock content %}
+</section>
+</main>
+{% endblock body_content %}

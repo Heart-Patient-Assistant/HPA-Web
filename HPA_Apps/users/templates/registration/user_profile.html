@@ -4,14 +4,28 @@
     User Profile
 {%endblock title%}
 
-{% block content %}
-<div class="card mb-3">
+{% block body_content %}
+<main id="main">
+ <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+            <h2 style="text-align: center;">Profile Page</h2>
+            {% if user.profile.id %}
+                <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:edit_profile_page' user.profile.id %}">Edit Profile Page</a></h3>
+                <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:change_password' %}">Edit Password</a></h3>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
     <div class="row no-gutters">
       <div class="col-md-2">
         {% if page_user.profile_pic  %}
           <img src="{{ page_user.profile_pic.url }}" class="card-img" alt="profile_picture" class="rounded-circle" width="200" height="200">
         {% else %}
-          <img src="{% static 'theblog\images\Unknown_person.jpg' %}" class="card-img" alt="profile_picture" class="rounded-circle" width="100" height="150">
+          <img src="{% static '\img\Unknown_person.jpg' %}" class="rounded-circle float-left" alt="profile_picture" width="200" height="200">
         {% endif %}
       </div>
     <div class="col-md-10">
@@ -20,16 +34,25 @@
             {{ page_user.user.first_name }}
             {{ page_user.user.last_name }}
           </h5>
-          <p class="card-text">{{ page_user.bio }}</p>
+          {% if profile.bio %}
+            <p>{{ profile.bio }}</p>
+          {% else %}
+                <p>No bio</p>
+          {% endif %}
           <p class="small text-muted">
-            {% if page_user.website_url %}
+            {% comment %} {% if page_user.website_url %}
               <a href="{{page_user.website_url}}"> Website</a>
-            {% endif %}
+            {% endif %} {% endcomment %}
+            <div class="social-links">
+                <a href="https://twitters.com/#"><i class="icofont-twitter"></i></a>
+                <a href="https://facebook.com/#"><i class="icofont-facebook"></i></a>
+                <a href="https://instagram.com/#"><i class="icofont-instagram"></i></a>
+              </div>
           </p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
       </div>
     </div>
   </div>
-
-{% endblock content %}
+  </section>
+</main>
+{% endblock body_content %}
