@@ -57,7 +57,11 @@ def CategoryView(request, cats):
     return render(
         request,
         "categories.html",
-        {"cats": cats.title().replace("-", " "), "category_posts": category_posts},
+        {
+            "cats": cats.title().replace("-", " "),
+            "category_posts": category_posts,
+            "category_name": cats,
+        },
     )
 
 
@@ -88,6 +92,19 @@ class BlogCreateView(CreateView):
     template_name = "post_new.html"
     # fields = '__all__'
     success_url = reverse_lazy("blogs:posts")
+
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs["user"] = self.request.user
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial["author"] = self.request.user
+        return initial
+
+    # def get_initial(self):
+    #     # call super if needed
+    #     return {"author": self.request.user}
 
 
 class BlogUpdateView(UpdateView):

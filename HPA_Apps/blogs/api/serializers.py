@@ -27,7 +27,7 @@ class PostListSerializer(serializers.HyperlinkedModelSerializer):
             "author",
             # 'slug',
             "title",
-             "post_date",
+            "post_date",
             "body",
         ]
 
@@ -71,13 +71,13 @@ class PostDetailSerializer(ModelSerializer):
 
 class CommentSerializer(ModelSerializer):
     # reply_count = SerializerMethodField()
-    name = SerializerMethodField()
+    author = SerializerMethodField()
 
     class Meta:
         model = Comment
         fields = [
             "id",
-            "name",
+            "author",
             # 'parent',
             "body",
             # 'reply_count',
@@ -89,8 +89,8 @@ class CommentSerializer(ModelSerializer):
     #         return obj.children().count()
     #     return 0
 
-    def get_name(
+    def get_author(
         self,
         obj,
     ):
-        return str(obj.name.first_name)
+        return str(obj.author.first_name)

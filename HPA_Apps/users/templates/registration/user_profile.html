@@ -23,7 +23,7 @@
     <div class="row no-gutters">
       <div class="col-md-2">
         {% if page_user.profile_pic  %}
-          <img src="{{ page_user.profile_pic.url }}" class="card-img" alt="profile_picture" class="rounded-circle" width="200" height="200">
+          <img src="{{ page_user.profile_pic.url }}" class="rounded-circle float-left" alt="profile_picture" width="200" height="200">
         {% else %}
           <img src="{% static '\img\Unknown_person.jpg' %}" class="rounded-circle float-left" alt="profile_picture" width="200" height="200">
         {% endif %}

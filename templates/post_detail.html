@@ -39,7 +39,7 @@
                 <div class="float-left">
                   <i class="icofont-folder"></i>
                   <ul class="cats">
-                    <li><a href="{% url 'blogs:category' post.category %}">{{post.category}}</a></li>
+                    <li><a href="{% url 'blogs:category' post.category %}">{{post.category|slugify}}</a></li>
                   </ul>
                 </div>
 

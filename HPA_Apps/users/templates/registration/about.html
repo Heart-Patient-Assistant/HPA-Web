@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}
+  about
+{%endblock title%}
+
+{% block body_content %}
+<main id="main">
+ <section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>About</h2>
+          <p>Some nonsense</p>
+        </div>
+    <h1 class="hh">Doctors' Team</h1>
+    <div class="row">
+      {%for users in object_list%}
+      <div class="col-lg-4">
+        {% if users.profile.profile_pic%}
+          <img src="{{ users.profile.profile_pic.url }}" class="img-fluid" alt="profile_picture"  width="200" height="200">
+        {% else %}
+          <img src="{% static '\img\Unknown_person.jpg' %}" class="img-fluid" alt="profile_picture" width="200" height="200">
+        {% endif %}
+        <a href="{% url 'users:show_profile' users.id %}"><h4>{{users.get_full_name}}</h4></a>
+      </div>
+      {%endfor%}
+    </div>
+</section>
+</main>
+{% endblock body_content %}
