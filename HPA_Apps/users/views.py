@@ -6,9 +6,9 @@ from rest_framework.settings import api_settings
 from django.shortcuts import render, get_object_or_404
 
 # from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
-from .forms import SignUpForm, EditProfileForm, PasswordsChangeForm, ProfilePageForm
+from .forms import SignUpForm, PasswordsChangeForm, ProfilePageForm  # , EditProfileForm
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import DetailView, CreateView
 from .models import Profile
@@ -38,7 +38,11 @@ class EditProfilePageView(generic.UpdateView):
     template_name = "registration/edit_profile_page.html"
     form_class = ProfilePageForm
     # fields = ['bio','profile_pic','website_url']
-    success_url = reverse_lazy("home")
+    # success_url = reverse_lazy("home")
+
+    def get_success_url(self):
+        pk = self.kwargs["pk"]
+        return reverse("users:show_profile", kwargs={"pk": pk})
 
 
 class ShowProfileView(DetailView):
@@ -54,7 +58,7 @@ class ShowProfileView(DetailView):
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordsChangeForm
-    success_url = reverse_lazy("password_success")
+    success_url = reverse_lazy("users:password_success")
     template_name = "registration/change_password.html"
 
 
@@ -68,13 +72,16 @@ class SignUpView(generic.CreateView):
     template_name = "registration/register.html"
 
 
-class EditProfileView(generic.UpdateView):
-    form_class = EditProfileForm
-    success_url = reverse_lazy("home")
-    template_name = "registration/edit_profile.html"
+# class EditProfileView(generic.UpdateView):
+#     form_class = EditProfileForm
+#     template_name = "registration/edit_profile.html"
 
-    def get_object(self):
-        return self.request.user
+#     def get_success_url(self):
+#         pk = self.kwargs["pk"]
+#         return reverse("users:show_profile", kwargs={"pk": pk})
+
+#     def get_object(self):
+#         return self.request.user
 
 
 # ----------------------------------------

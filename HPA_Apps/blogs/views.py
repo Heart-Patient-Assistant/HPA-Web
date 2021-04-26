@@ -15,7 +15,11 @@ class CommentCreateView(CreateView):
     form_class = CommentForm
     template_name = "add_comment.html"
     # fields = '__all__'
-    success_url = reverse_lazy("home")
+    # success_url = reverse_lazy("blogs:posts")
+
+    def get_success_url(self):
+        pk = self.kwargs["pk"]
+        return reverse("blogs:post_detail", kwargs={"pk": pk})
 
     def form_valid(self, form):
         form.instance.post_id = self.kwargs["pk"]
@@ -83,6 +87,7 @@ class BlogCreateView(CreateView):
     form_class = PostForm
     template_name = "post_new.html"
     # fields = '__all__'
+    success_url = reverse_lazy("blogs:posts")
 
 
 class BlogUpdateView(UpdateView):
@@ -90,12 +95,13 @@ class BlogUpdateView(UpdateView):
     form_class = EditForm
     template_name = "post_edit.html"
     # fields = ['title','body']
+    success_url = reverse_lazy("blogs:posts")
 
 
 class BlogDeleteView(DeleteView):
     model = Post
     template_name = "post_delete.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("blogs:posts")
 
 
 class CategoryCreateView(CreateView):

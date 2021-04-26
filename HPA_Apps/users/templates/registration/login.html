@@ -3,9 +3,21 @@
   Login
 {%endblock title%}
 
-{% block content %}
-  <h1>Login</h1>
-  <br><br>
+{% block body_content %}
+<main id="main">
+ <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+            <h2 style="text-align: center;">Login</h2>
+            {% if user.profile.id %}
+                <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:edit_profile_page' user.profile.id %}">Edit Profile Page</a></h3>
+                {% comment %} <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:edit_profile' %}">Edit Profile</a></h3> {% endcomment %}
+            {% endif %}
+          </div>
+        </div>
+      </div><br>
+
   <div class="form-group">
     <form action="" method="post">{% csrf_token %}
       <div class="form-group">
@@ -18,4 +30,6 @@
     <p>Not Registered? Sign Up <a href="{% url 'users:signup' %}">Here.</a></p>
     </form>
   </div>
-{% endblock content %}
+  </section>
+</main>
+{% endblock body_content %}

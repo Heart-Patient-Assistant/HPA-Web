@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     SignUpView,
-    EditProfileView,
+    # EditProfileView,
     PasswordsChangeView,
     PasswordSuccessView,
     ShowProfileView,
@@ -20,9 +20,9 @@ urlpatterns = [
     # path("login", views.UserLoginView.as_view()),
     path("upladmedicalrecord", views.UploadMedicalData.as_view()),
     path("signup/", SignUpView.as_view(), name="signup"),
-    path("edit_profile/", EditProfileView.as_view(), name="edit_profile"),
-    path("password/", PasswordsChangeView.as_view()),
-    path("password_success/", PasswordSuccessView, name="password_success"),
+    # path("edit_profile/", EditProfileView.as_view(), name="edit_profile"),
+    path("password/", PasswordsChangeView.as_view(), name="change_password"),
+    path("password/password_success/", PasswordSuccessView, name="password_success"),
     path("<int:pk>/profile", ShowProfileView.as_view(), name="show_profile"),
     path(
         "<int:pk>/edit_profile_page",

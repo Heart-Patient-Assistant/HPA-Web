@@ -9,9 +9,24 @@ from django.forms import ModelForm
 
 
 class ProfilePageForm(forms.ModelForm):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}))
+    first_name = forms.CharField(
+        max_length=100, widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+    last_name = forms.CharField(
+        max_length=100, widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
     class Meta:
         model = Profile
-        fields = ("bio", "profile_pic", "website_url")
+        fields = (
+            "first_name",
+            "last_name",
+            "email",
+            "bio",
+            "profile_pic",
+            "website_url",
+        )
         widgets = {
             "bio": forms.Textarea(
                 attrs={"class": "form-control", "rows": 2, "cols": 10}
@@ -71,7 +86,7 @@ class PasswordsChangeForm(PasswordChangeForm):
 
     class Meta:
         model = User
-        fields = ("old_password", "new_password1", "new_password2")
+        fields = ("old_password", "new_password 1", "new_password 2")
 
 
 # ----------------------------

@@ -96,7 +96,7 @@
                 {% for comment in post.comments.all reversed %}
                 <div class="comment clearfix">
                 {% if post.author.profile.profile_pic%}
-                <img src="{% url 'users:show_profile' post.author.profile.id %}" class="comment-img  float-left" alt="profile_picture">
+                <img src="{% url 'users:show_profile' post.author.profile.id %}" class="rounded-circle float-left" alt="profile_picture">
                 {% else%}
                 <img src="{% static '\img\Unknown_person.jpg' %}" class="comment-img  float-left" alt="">
                 {% endif %}

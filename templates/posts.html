@@ -11,6 +11,9 @@
         <div class="container">
           <div class="breadcrumb-hero">
             <h2 style="text-align: center;">Blog</h2>
+          <div class= "breadcrumb-hero"><br>
+            <h3 style="text-align: center;"><a href="{% url 'blogs:post_new' %}">New Post</a></h3>
+          </div>
           </div>
         </div>
       </div>
@@ -27,9 +30,11 @@
             <article class="entry">
 
             {% comment %} image to add in the post background {% endcomment %}
+              {%if post.header_image%}
               <div class="entry-img">
                 <img src="{{post.header_image.url}}" alt="" class="img-fluid">
               </div>
+              {% endif %}
 
               {% comment %} header is post title and ref is the link to post detail {% endcomment %}
               <h2 class="entry-title">
@@ -39,7 +44,7 @@
               {% comment %} first list is the author and its link is the profile and second is the post_date {% endcomment %}
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html"><p>{{post.author}}</p></a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html"><p>{{post.author.get_full_name}}</p></a></li>
                   <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><p>{{post.post_date}}</p></a></li>
                 </ul>
               </div>

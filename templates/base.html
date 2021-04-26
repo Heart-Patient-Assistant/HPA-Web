@@ -39,10 +39,14 @@
         <ul>
           <li class="active"><a href="{% url 'home' %}">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="{% url 'users:signup' %}">Sign up</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="profile.html">Profile</a></li>
-
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'users:show_profile' user.profile.id %}">Profile</a></li>
+          <li><a href ="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+          <li><a href="{% url 'users:signup' %}">Sign up</a></li>
+          <li><a href="{% url 'login' %}">Log in</a></li>
+          {% endif %}
           <li><a href="{% url 'blogs:posts' %}">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
 
