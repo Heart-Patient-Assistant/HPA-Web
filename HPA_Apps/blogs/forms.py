@@ -12,12 +12,14 @@ for item in choices:
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("title", "title_tag", "author", "category", "body", "header_image")
+        fields = ("title", "title_tag", "category", "author", "body", "header_image")
 
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
             "title_tag": forms.TextInput(attrs={"class": "form-control"}),
-            "author": forms.Select(attrs={"class": "form-control"}),
+            # "author": forms.Select(attrs={"class": "form-control", "readonly": True}),
+            # "author": forms.TextInput(attrs={"readonly": True,),
+            "author": forms.HiddenInput(),
             "category": forms.Select(
                 choices=choices_list, attrs={"class": "form-control"}
             ),
@@ -25,6 +27,17 @@ class PostForm(forms.ModelForm):
                 attrs={"class": "form-control", "rows": 4, "cols": 15}
             ),
         }
+
+    # def __init__(self, *args, **kwargs):
+    #     self.user: Account = kwargs.pop("user", None)
+    #     super(PostForm, self).__init__(*args, **kwargs)
+
+    # def save(self, commit=True):
+    #     post = super().save(commit=False)
+    #     if commit:
+    #         post.author = self.user
+    #         post.save()
+    #     return post
 
 
 class EditForm(forms.ModelForm):

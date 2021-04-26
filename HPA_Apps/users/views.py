@@ -10,8 +10,8 @@ from django.urls import reverse_lazy, reverse
 from django.views import generic
 from .forms import SignUpForm, PasswordsChangeForm, ProfilePageForm  # , EditProfileForm
 from django.contrib.auth.views import PasswordChangeView
-from django.views.generic import DetailView, CreateView
-from .models import Profile
+from django.views.generic import DetailView, CreateView, ListView
+from .models import Doctor, Profile, User
 
 # from .models import User
 
@@ -23,6 +23,8 @@ from .forms import MedicalRecordForm
 from . import models, serializers, permissions
 
 # Create your views here.
+
+
 class CreateProfilePage(CreateView):
     model = Profile
     template_name = "registration/create_user_profile.html"
@@ -64,6 +66,22 @@ class PasswordsChangeView(PasswordChangeView):
 
 def PasswordSuccessView(request):
     return render(request, "registration/password_success.html", {})
+
+
+# def AboutView(request):
+#     return render(request, "registration/about.html", {})
+
+
+class AboutView(ListView):
+    model = Doctor
+    template_name = "registration/about.html"
+    ordering = ["-id"]
+
+    # def get_context_data(self, *args, **kwargs):
+    #     doctors_menu = Doctor.objects.all()
+    #     context = super(AboutView, self).get_context_data(*args, **kwargs)
+    #     context["doctors_menu"] = doctors_menu
+    #     return context
 
 
 class SignUpView(generic.CreateView):

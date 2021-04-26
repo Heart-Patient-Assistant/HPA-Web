@@ -1,20 +1,71 @@
 {% extends 'base.html'%}
 {%block title%} List Category {%endblock title%}
-{% block content %}
+{% block body_content %}
+<main id="main">
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="breadcrumb-hero">
+        <div class="container">
+        <div class="breadcrumb-hero">
+        <h2 style="text-align: center;">{{category_name}} Posts</h2>
+        </div>
+        </div>
+        </div>
+    </section>
 {% if category_posts %}
-    <ul>
+    <section id="blog" class="blog">
+        {% for post in category_posts reversed %}
+        <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+            <article class="entry">
+
+            {%if post.header_image%}
+              <div class="entry-img">
+                <img src="{{post.header_image.url}}" alt="" class="img-fluid">
+              </div>
+              {% endif %}
+
+            <h2 class="entry-title">
+                <a href="{% url 'blogs:post_detail' post.pk %}"><p>{{post.title}}</p></a>
+            </h2>
+
+            <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html"><p>{{post.author.get_full_name}}</p></a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><p>{{post.post_date}}</p></a></li>
+                </ul>
+            </div>
+
+            <div class="entry-content">
+                <p>
+                  {{post.body}}
+                </p>
+                <div class="read-more">
+                  <a href="{% url 'blogs:post_detail' post.pk %}">Read More</a>
+                </div>
+            </div>
+            </article>
+            </div>
+            </div>
+            {% endfor %}
+{% else %}
+    <h2>No Posts with such tag</h2>
+{% endif %}
+</main>
+{% endblock body_content %}
+
+
+        {% comment %} <h2 style="text-align: center;">{{ category_posts.count}}</h2> {% endcomment %}
+
+
+{% comment %} <ul>
         {% for post in category_posts %}
         <div class="post-entry">
             <h2>{{ post.title }}</h2>
             <small>{{post.post_date}}</small>
             <p>{{ post.body }}</p>
         </div>
-
-        <p><a href="{% url 'blogs:post_edit' post.pk %}">+Edit Blog Post</a></p>
-        <p><a href="{% url 'blogs:post_delete' post.pk %}">+Delete Blog Post</a></p>
         {% endfor %}
-    </ul>
-{% else %}
-    <h2>No Posts with such tag</h2>
-{% endif %}
-{% endblock content %}
+    </ul> {% endcomment %}

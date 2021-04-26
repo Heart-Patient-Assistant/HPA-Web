@@ -114,8 +114,8 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
 
-    def get_absolute_url(self):
-        return reverse("home")
+    # def get_absolute_url(self):
+    #     return reverse("home")
 
 
 # -------------- Receiver to create/update when create/update user instance

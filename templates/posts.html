@@ -44,8 +44,8 @@
               {% comment %} first list is the author and its link is the profile and second is the post_date {% endcomment %}
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html"><p>{{post.author.get_full_name}}</p></a></li>
-                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><p>{{post.post_date}}</p></a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href={% url 'users:show_profile' post.author.profile.id %}><p>{{post.author.get_full_name}}</p></a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i><p>{{post.post_date}}</p></li>
                 </ul>
               </div>
 

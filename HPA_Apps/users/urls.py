@@ -8,6 +8,7 @@ from .views import (
     ShowProfileView,
     EditProfilePageView,
     CreateProfilePage,
+    AboutView,
 )
 from . import views
 
@@ -20,6 +21,7 @@ urlpatterns = [
     # path("login", views.UserLoginView.as_view()),
     path("upladmedicalrecord", views.UploadMedicalData.as_view()),
     path("signup/", SignUpView.as_view(), name="signup"),
+    path("about/", AboutView.as_view(), name="about"),
     # path("edit_profile/", EditProfileView.as_view(), name="edit_profile"),
     path("password/", PasswordsChangeView.as_view(), name="change_password"),
     path("password/password_success/", PasswordSuccessView, name="password_success"),
