@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{%block title%}
+  Give Feedback
+{%endblock title%}
+
+       
+{% block body_content %}
+    <br><br><br><br>
+    <h1>New Feedback</h1>
+    <div class="form-group"></div>
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="" value="Give Feedback" class= "btn btn-secondary">
+    </form>
+    </div>  
+    <!-- 
+        {% if user.is_authenticated %}
+    
+        {% else %}
+        <h1>You can't perform this action</h1>
+       {% endif %}
+    -->
+        
+   
+{% endblock body_content %}

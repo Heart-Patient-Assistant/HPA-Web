@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{%block title%}
+ Get Prediction
+{%endblock title%}
+
+       
+{% block body_content %}
+    <br><br><br><br>
+    <h1>Get prediction</h1>
+    <div class="form-group"></div>
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="" value="predict" class= "btn btn-secondary">
+    </form>
+    </div>  
+    <!-- 
+        {% if user.is_authenticated %}
+    
+        {% else %}
+        <h1>You can't perform this action</h1>
+       {% endif %}
+    -->
+    {% endblock %}

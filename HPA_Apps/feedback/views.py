@@ -37,6 +37,6 @@ def giveFeedbackApi(request):
 #giving feedback 
 class giveFeedback(CreateView):
     form_class=FeedBackForm
-    template_name='post_form.html'
+    template_name='feedback_form.html'
     success_url = '/'
   
