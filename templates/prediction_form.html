@@ -5,20 +5,22 @@
 
        
 {% block body_content %}
-    <br><br><br><br>
-    <h1>Get prediction</h1>
-    <div class="form-group"></div>
-    <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" name="" value="predict" class= "btn btn-secondary">
-    </form>
-    </div>  
-    <!-- 
-        {% if user.is_authenticated %}
-    
-        {% else %}
-        <h1>You can't perform this action</h1>
-       {% endif %}
-    -->
-    {% endblock %}
+    <main id="main">
+        <section id="breadcrumbs" class="breadcrumbs">
+                <div class="breadcrumb-hero">
+                    <div class="container">
+                        <div class="breadcrumb-hero">
+                            <h2 style="text-align: left;">Get Prediction</h2>
+                            <div class="form-group">
+                                <form action="" method="post">  
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <input type="submit" name="" value="predict" class= "btn btn-secondary">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+{% endblock %}
