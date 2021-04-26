@@ -5,22 +5,35 @@
 
        
 {% block body_content %}
-    <br><br><br><br>
-    <h1>New Feedback</h1>
-    <div class="form-group"></div>
-    <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" name="" value="Give Feedback" class= "btn btn-secondary">
-    </form>
-    </div>  
-    <!-- 
-        {% if user.is_authenticated %}
+
     
-        {% else %}
-        <h1>You can't perform this action</h1>
-       {% endif %}
-    -->
+    <main id="main">
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>New Feedback</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="form-group">
+            <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="" value="Give Feedback" class= "btn btn-secondary">
+            </form>
+            </div>
+              </div>
+          
+    </div>  
+            </div>
+          </div>
+    </section>
+    <!-- End Services Section -->
+
+  </main>
         
    
 {% endblock body_content %}
