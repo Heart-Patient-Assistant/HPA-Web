@@ -47,7 +47,7 @@ class EditForm(forms.ModelForm):
 
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
-            "author": forms.Select(attrs={"class": "form-control"}),
+            "author": forms.HiddenInput(),
             "body": forms.Textarea(attrs={"class": "form-control"}),
         }
 
@@ -59,6 +59,7 @@ class CommentForm(forms.ModelForm):
 
         widgets = {
             # "author": forms.TextInput(attrs={"class": "form-control"}),
+            "author": forms.HiddenInput(),
             "body": forms.Textarea(
                 attrs={"class": "form-control", "rows": 2, "cols": 10}
             ),
