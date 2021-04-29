@@ -20,7 +20,7 @@
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">{{post.author.get_full_name}}</a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> {{post.author.get_full_name}}</li>
                   <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i><small>{{post.post_date}}</small></li>
                   {% comment %} <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="blog-single.html">12 Comments</a></li> {% endcomment %}
                 </ul>
@@ -71,7 +71,7 @@
               <form action="{% url 'blogs:like_post' post.pk%}" method="POST">
                 {% csrf_token %}
 
-                {% if user.is_authenticated%}
+                {% if user.is_authenticated %}
                   {% if liked %}
                   <button type='submit' name='post_id' value="{{post.id}}" class='btn btn-danger
                   btn-sm'>Unlike</button>
@@ -90,9 +90,17 @@
               <h2>Comments..</h2>
               {% if not post.comments.all %}
                 <p>No Comments Yet.. </p>
+                {% if user.is_authenticated %}
                 <p><a href="{% url 'blogs:add_comment' post.pk %}">Add One</a></p>
+                {% else %}
+                <p><a href="{% url 'login' %}">Login</a> to comment</p>
+                {% endif %}
               {% else %}
-              <a href="{% url 'blogs:add_comment' post.pk %}">Add Comment</a><br>
+                {% if user.is_authenticated %}
+                <a href="{% url 'blogs:add_comment' post.pk %}">Add Comment</a><br>
+                {% else %}
+                <p><a href="{% url 'login' %}">Login</a> to comment</p>
+                {% endif %}
                 {% for comment in post.comments.all reversed %}
                 <div class="comment clearfix">
                 {% if post.author.profile.profile_pic%}
@@ -107,6 +115,7 @@
               </div>
                 {% endfor %}
               {% endif %}
+
 
 </section>
 </main>

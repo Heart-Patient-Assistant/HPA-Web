@@ -25,6 +25,11 @@ class CommentCreateView(CreateView):
         form.instance.post_id = self.kwargs["pk"]
         return super().form_valid(form)
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial["author"] = self.request.user
+        return initial
+
 
 def LikeView(request, pk):
     post = get_object_or_404(Post, id=request.POST.get("post_id"))
@@ -93,18 +98,10 @@ class BlogCreateView(CreateView):
     # fields = '__all__'
     success_url = reverse_lazy("blogs:posts")
 
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs["user"] = self.request.user
-
     def get_initial(self):
         initial = super().get_initial()
         initial["author"] = self.request.user
         return initial
-
-    # def get_initial(self):
-    #     # call super if needed
-    #     return {"author": self.request.user}
 
 
 class BlogUpdateView(UpdateView):
@@ -113,6 +110,11 @@ class BlogUpdateView(UpdateView):
     template_name = "post_edit.html"
     # fields = ['title','body']
     success_url = reverse_lazy("blogs:posts")
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial["author"] = self.request.user
+        return initial
 
 
 class BlogDeleteView(DeleteView):
