@@ -8,7 +8,7 @@ class PostCreateUpdateSerializer(ModelSerializer):
         model = Post
         fields = (
             "id",
-            "author",
+            # "author",
             "title",
             # 'slug',
             "body",
@@ -24,6 +24,7 @@ class PostListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
         fields = [
+            'id',
             "author",
             # 'slug',
             "title",
@@ -40,7 +41,7 @@ class PostListSerializer(serializers.HyperlinkedModelSerializer):
 
 class PostDetailSerializer(ModelSerializer):
     author = SerializerMethodField()
-    image = SerializerMethodField()
+    header_image = SerializerMethodField()
 
     class Meta:
         fields = (
@@ -51,7 +52,7 @@ class PostDetailSerializer(ModelSerializer):
             "body",
             "post_date",
             # "status",
-            "image",
+            "header_image",
         )
         model = Post
 
@@ -61,9 +62,9 @@ class PostDetailSerializer(ModelSerializer):
     ):
         return str(obj.author.first_name)
 
-    def get_image(self, obj):
+    def get_header_image(self, obj):
         try:
-            image = obj.image.url
+            image = obj.header_image.url
         except:
             image = None
         return image
