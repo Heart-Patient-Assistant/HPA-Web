@@ -9,6 +9,9 @@ from .views import (
     EditProfilePageView,
     CreateProfilePage,
     AboutView,
+    EditDoctorProfile,
+    ShowProfilePostsView,
+    # AddDoctorSpeciality,
 )
 from . import views
 
@@ -27,11 +30,24 @@ urlpatterns = [
     path("password/password_success/", PasswordSuccessView, name="password_success"),
     path("<int:pk>/profile", ShowProfileView.as_view(), name="show_profile"),
     path(
+        "<int:pk>/profile/posts",
+        ShowProfilePostsView.as_view(),
+        name="show_profile_posts",
+    ),
+    path(
         "<int:pk>/edit_profile_page",
         EditProfilePageView.as_view(),
         name="edit_profile_page",
     ),
     path(
+        "<int:pk>/edit_doctor_page",
+        EditDoctorProfile.as_view(),
+        name="edit_doctor_page",
+    ),
+    path(
         "create_profile_page", CreateProfilePage.as_view(), name="create_profile_page"
     ),
+    # path(
+    #     "<int:pk>/add_speciality", AddDoctorSpeciality.as_view(), name="add_speciality"
+    # ),
 ]

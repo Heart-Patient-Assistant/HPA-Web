@@ -42,23 +42,43 @@
           <li><a href="{%url 'services:servicesList' %}">Services</a></li>
           {% if user.is_authenticated %}
           <li><a href="{% url 'users:show_profile' user.profile.id %}">Profile</a></li>
-          <li><a href ="{% url 'logout' %}">Log Out</a></li>
+          {% comment %} <li><a href ="{% url 'logout' %}">Log Out</a></li> {% endcomment %}
           {% else %}
           <li><a href="{% url 'users:signup' %}">Sign up</a></li>
           <li><a href="{% url 'login' %}">Log in</a></li>
           {% endif %}
           <li><a href="{% url 'blogs:posts' %}">Blog</a></li>
           <li><a href="{% url 'feedback:givefeedback' %}">Contact</a></li>
+          <li>
+          <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{user.first_name}} {{user.last_name}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'users:edit_profile_page' user.profile.id %}">Edit Profile Page</a>
+              {% if user.profile.id %}
+                <a class="dropdown-item" href="{% url 'users:edit_doctor_page' user.profile.id %}">Edit Doctor Page</a>
+                <a class="dropdown-item" href="{% url 'users:change_password' %}">Change Password</a>
+              <div class="dropdown-divider"></div>
+              {% endif %}
+              <a class="dropdown-item" href ="{% url 'logout' %}">Log Out</a>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
 
         </ul>
+        </li>
       </nav>
       <!-- .nav-menu -->
 
       <div class="header-social-links">
-        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+        {% comment %} <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
         <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
         <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
+        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a> {% endcomment %}
       </div>
 
     </div>

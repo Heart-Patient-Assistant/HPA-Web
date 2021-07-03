@@ -8,10 +8,19 @@ from django.shortcuts import render, get_object_or_404
 # from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
 from django.views import generic
-from .forms import SignUpForm, PasswordsChangeForm, ProfilePageForm  # , EditProfileForm
+from .forms import (
+    EditProfileForm,
+    SignUpForm,
+    PasswordsChangeForm,
+    ProfilePageForm,
+    DoctorPageForm,
+    EditProfileForm,
+    # SpecialityForm,
+)
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import DetailView, CreateView, ListView
 from .models import Doctor, Profile, User
+from HPA_Apps.blogs.models import Post
 
 # from .models import User
 
@@ -38,9 +47,29 @@ class CreateProfilePage(CreateView):
 class EditProfilePageView(generic.UpdateView):
     model = Profile
     template_name = "registration/edit_profile_page.html"
-    form_class = ProfilePageForm
+    form_class = EditProfileForm
     # fields = ['bio','profile_pic','website_url']
     # success_url = reverse_lazy("home")
+
+    # def get_object(self):
+    #     return self.request.user
+
+    def get_success_url(self):
+        pk = self.kwargs["pk"]
+        return reverse("users:show_profile", kwargs={"pk": pk})
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial["first_name"] = self.request.user.first_name
+        initial["last_name"] = self.request.user.last_name
+        initial["email"] = self.request.user.email
+        return initial
+
+
+class EditDoctorProfile(generic.UpdateView):
+    model = Profile
+    template_name = "registration/edit_doctor_page.html"
+    form_class = DoctorPageForm
 
     def get_success_url(self):
         pk = self.kwargs["pk"]
@@ -56,6 +85,11 @@ class ShowProfileView(DetailView):
         page_user = get_object_or_404(Profile, id=self.kwargs["pk"])
         context["page_user"] = page_user
         return context
+
+
+class ShowProfilePostsView(ListView):
+    model = Post
+    template_name = "registration/user_profile_posts.html"
 
 
 class PasswordsChangeView(PasswordChangeView):

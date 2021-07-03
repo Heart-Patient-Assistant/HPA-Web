@@ -8,6 +8,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+# from HPA_Apps.blogs.models import Post
+
 
 # -------------- ModelManager
 class UserManager(BaseUserManager):
@@ -102,20 +104,43 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 # -------------- User Profile
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(null=True)
+    bio = models.TextField(null=True, blank=True)
     profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
-    website_url = models.CharField(max_length=255, null=True, blank=True)
+    facebook_url = models.CharField(max_length=255, null=True, blank=True)
+    twitter_url = models.CharField(max_length=255, null=True, blank=True)
+    instagram_url = models.CharField(max_length=255, null=True, blank=True)
+    academic_Title = models.CharField(max_length=100, null=True, blank=True)
+    speciality = models.CharField(max_length=255, null=True, blank=True)
+    employment_history = models.TextField(null=True, blank=True)
+    experience = models.TextField(null=True, blank=True)
     # phone_number= ..
     birth_date = models.DateField(null=True, blank=True)
     Location = models.CharField(max_length=30, blank=True)
-    # profile= models.ImageField(null=True,bland=True)
     # doctor_resp = ..
 
     def __str__(self):
         return str(self.user)
 
+    def split_speciality(self):
+        return self.speciality.split(",")
+
     # def get_absolute_url(self):
     #     return reverse("home")
+
+
+class appointment(models.Model):
+    date = models.DateField()
+    time = models.TimeField()
+    status = models.CharField(
+        choices=[("Pending", "Pending"), ("Completed", "Completed")], max_length=10
+    )
+    patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name="patient")
+    doctor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="doctor")
+
+    def str(self):
+        return "Patient - {} Doc- {} At {} {}".format(
+            self.patient, self.doctor, self.date, self.time
+        )
 
 
 # -------------- Receiver to create/update when create/update user instance

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{%block title%}
+  Edit Profile Page
+{%endblock title%}
+
+{% block body_content %}
+<main id="main">
+ <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+            <h2 style="text-align: center;">Edit Medical Profile</h2>
+          </div>
+        </div>
+      </div>
+    {% if user.is_authenticated %}
+    {% if user.id == profile.user.id %}
+        <div class="form-group"></div>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <input type="submit" name="" value="Update Profile Page" class= "btn btn-secondary">
+            </form>
+        </div>
+    {% else %}
+        You're not the owner of this profile
+    {% endif %}
+{% else %}
+  You're not allowed to perform this action
+{% endif %}
+</section>
+</main>
+{% endblock body_content %}
