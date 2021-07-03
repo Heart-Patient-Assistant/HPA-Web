@@ -4,6 +4,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, request
 
 # from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
@@ -16,11 +17,15 @@ from .forms import (
     DoctorPageForm,
     EditProfileForm,
     # SpecialityForm,
+    AppointmentForm
 )
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import DetailView, CreateView, ListView
-from .models import Doctor, Profile, User
+from .models import Doctor, Profile, User , appointment
 from HPA_Apps.blogs.models import Post
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # from .models import User
 
@@ -91,6 +96,14 @@ class ShowProfilePostsView(ListView):
     model = Post
     template_name = "registration/user_profile_posts.html"
 
+    # def get(self, request, pk, *args, **kwargs):
+    #
+    #     # print(pk)
+    #     # return Post.objects.filter(pk= Post.author.id())
+    #     #  return Post.objects.filter(Post.id == pk)
+
+
+
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordsChangeForm
@@ -158,3 +171,42 @@ class UploadMedicalData(CreateView):
     form_class = MedicalRecordForm
     template_name = "post_form.html"
     success_url = "/"
+
+
+class AppointmentCreateView(LoginRequiredMixin,CreateView):
+    login_url = '/users/login/'
+    model = appointment
+    form_class = AppointmentForm
+    template_name = "appointment_create.html"
+    # success_url = reverse_lazy("AppointmentCreateView")
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial["patient"] = self.request.user
+        return initial
+
+    def post(self, request, *args, **kwargs):
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Appointment done successfully')
+            return redirect('/users/appointment/create')
+
+class AppointmentsForAPatientView(LoginRequiredMixin, ListView):
+    login_url = '/users/login/'
+    # redirect_field_name = 'login'
+    template_name = "appointment_list.html"
+
+
+    def get_queryset(self):
+        return appointment.objects.filter(patient=self.request.user)
+
+class AppointmentsForADoctorView(LoginRequiredMixin, ListView):
+    login_url = '/users/login/'
+    redirect_field_name = 'account:login'
+    template_name = "appointment_list.html"
+
+
+    def get_queryset(self):
+        return appointment.objects.filter(doctor=self.request.user)
+

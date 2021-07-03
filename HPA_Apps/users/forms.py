@@ -6,7 +6,7 @@ from django.contrib.auth.forms import (
 from django import forms
 from django.forms import widgets
 from django.forms.widgets import Select
-from .models import User, Profile, MedicalRecords
+from .models import User, Profile, MedicalRecords, appointment
 from django.forms import ModelForm
 
 choices = [
@@ -166,3 +166,23 @@ class MedicalRecordForm(ModelForm):
     class Meta:
         model = MedicalRecords
         fields = "__all__"
+
+class AppointmentForm(forms.ModelForm):
+
+    class Meta:
+        model = appointment
+        fields = '__all__'
+        widgets = {
+
+            "patient": forms.HiddenInput(),
+
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AppointmentForm, self).__init__(*args, **kwargs)
+        if self.instance:
+            # self.fields['patient'].queryset = User.objects.filter(user_type="P")
+            self.fields['doctor'].queryset = User.objects.filter(type="DOCTOR")
+            self.fields["date"].label = "Date (YYYY-MM-DD)"
+            self.fields["time"].label = "Time 24 hr (HH:MM)"
+

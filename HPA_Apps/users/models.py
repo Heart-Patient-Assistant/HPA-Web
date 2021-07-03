@@ -137,10 +137,12 @@ class appointment(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name="patient")
     doctor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="doctor")
 
-    def str(self):
+    def __str__(self):
         return "Patient - {} Doc- {} At {} {}".format(
             self.patient, self.doctor, self.date, self.time
         )
+
+
 
 
 # -------------- Receiver to create/update when create/update user instance

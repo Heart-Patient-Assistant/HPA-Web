@@ -74,3 +74,5 @@ def editprofile(request):
         data["birth_date"] = "input your birth data y-m-d "
 
     return Response(data)
+
+

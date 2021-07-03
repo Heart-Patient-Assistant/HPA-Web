@@ -12,6 +12,8 @@ from .views import (
     EditDoctorProfile,
     ShowProfilePostsView,
     # AddDoctorSpeciality,
+    AppointmentCreateView,
+
 )
 from . import views
 
@@ -50,4 +52,7 @@ urlpatterns = [
     # path(
     #     "<int:pk>/add_speciality", AddDoctorSpeciality.as_view(), name="add_speciality"
     # ),
+    path("appointment/create", AppointmentCreateView.as_view(), name="appointment-create"),
+    path("appointment/p/", views.AppointmentsForAPatientView.as_view(), name="patient-appointments"),
+    path("appointment/d/", views.AppointmentsForADoctorView.as_view(), name="doctor-appointments"),
 ]
