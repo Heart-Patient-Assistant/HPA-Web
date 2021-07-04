@@ -6,13 +6,176 @@
 
 {% block body_content %}
 <main id="main">
- <section id="breadcrumbs" class="breadcrumbs">
+<section class="page-title bg-1">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block text-center">
+          <span class="text-white">Doctor Details</span>
+          <h1 class="text-capitalize mb-5 text-lg">{{ page_user.user.get_full_name}}'s Profile page</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section doctor-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-6">
+				<div class="doctor-img-block">
+					{% if page_user.profile_pic  %}
+          <img src="{{ page_user.profile_pic.url }}" class="img-fluid w-100" alt="profile_picture">
+        {% else %}
+          <img src="{% static '\img\Unknown_person.jpg' %}" class="img-fluid w-100" alt="profile_picture">
+        {% endif %}
+
+					<div class="info-block mt-4">
+						<h4 class="mb-0">{{ page_user.user.get_full_name}}</h4>
+						<h6 class="mb-0">{{ profile.academic_Title}}</h4>
+						<h6 class="mb-0"><p>{{ profile.bio}}</p></h4>
+						<ul class="list-inline mt-4 doctor-social-links">
+							<a href="{{ profile.twitter_url }}"><i class="icofont-twitter"></i></a>
+                <a href="{{ profile.facebook_url }}"><i class="icofont-facebook"></i></a>
+                <a href="{{ profile.instagram_url }}"><i class="icofont-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-8 col-md-6">
+				<div class="doctor-details mt-4 mt-lg-0">
+					<h2 class="text-md">Introducing myself</h2>
+					<div class="divider my-4"></div>
+					<p>
+						{% if profile.bio %}
+            		<p>{{ profile.employment_history }}</p>
+          	{% else %}
+                <p>No emoloyment history</p>
+          	{% endif %}
+					</p>
+					<a href="appoinment.html" class="btn btn-danger">Make an Appoinment<i class="icofont-simple-right ml-2  "></i></a><br><br>
+					<a href="{% url 'users:show_profile_posts' user.profile.id %}" class="btn btn-primary">See Doctor's Posts<i class="icofont-simple-right ml-2  "></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div
+style="background-color: lightgray;">
+
+{% comment %} <section class="section doctor-qualification gray-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="section-title">
+					<h3>My Educational Qualifications</h3>
+					<div class="divider my-4"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="edu-block mb-5">
+					<span class="h6 text-muted">Year(2005-2007) </span>
+					<h4 class="mb-3 title-color">MBBS, M.D at University of Wyoming</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi doloremque harum, mollitia, soluta maxime porro veritatis fuga autem impedit corrupti aperiam sint, architecto, error nesciunt temporibus! Vel quod, dolor aliquam!</p>
+				</div>
+
+				<div class="edu-block">
+					<span class="h6 text-muted">Year(2007-2009) </span>
+					<h4 class="mb-3 title-color">M.D. of Netherland Medical College</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi doloremque harum, mollitia, soluta maxime porro veritatis fuga autem impedit corrupti aperiam sint, architecto, error nesciunt temporibus! Vel quod, dolor aliquam!</p>
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="edu-block mb-5">
+					<span class="h6 text-muted">Year(2009-2010) </span>
+					<h4 class="mb-3 title-color">MBBS, M.D at University of Japan</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi doloremque harum, mollitia, soluta maxime porro veritatis fuga autem impedit corrupti aperiam sint, architecto, error nesciunt temporibus! Vel quod, dolor aliquam!</p>
+				</div>
+
+				<div class="edu-block">
+					<span class="h6 text-muted">Year(2010-2011) </span>
+					<h4 class="mb-3 title-color">M.D. of Canada Medical College</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi doloremque harum, mollitia, soluta maxime porro veritatis fuga autem impedit corrupti aperiam sint, architecto, error nesciunt temporibus! Vel quod, dolor aliquam!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> {% endcomment %}
+
+
+<section class="section doctor-skills">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4">
+				<h3>My skills</h3>
+				<div class="divider my-4"></div>
+				<p>{{ profile.experience }}</p>
+			</div>
+			<div class="col-lg-4">
+				<div class="skill-list">
+					<h5 class="mb-4">Expertise area</h5>
+					<ul class="list-unstyled department-service">
+					{% if profile.split_speciality != None %}
+					{% for Speciality in profile.split_speciality %}
+						<li><i class="icofont-check mr-2"></i>{{Speciality|cut:"'"|cut:"]"|cut:"["|cut:" "}}</li>
+					{% endfor %}
+					{% endif %}
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="sidebar-widget  gray-bg p-4">
+					<h5 class="mb-4">Make Appoinment</h5>
+
+					<ul class="list-unstyled lh-35">
+					  <li class="d-flex justify-content-between align-items-center">
+					    <a href="#">Monday - Friday</a>
+					    <span>9:00 - 17:00</span>
+					  </li>
+					  <li class="d-flex justify-content-between align-items-center">
+					    <a href="#">Saturday</a>
+					    <span>9:00 - 16:00</span>
+					  </li>
+					  <li class="d-flex justify-content-between align-items-center">
+					    <a href="#">Sunday</a>
+					    <span>Closed</span>
+					  </li>
+					</ul>
+
+					<div class="sidebar-contatct-info mt-4">
+						<p class="mb-0">Need Urgent Help?</p>
+						<h3 class="text-color-2">+23-4565-65768</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</div>
+{% endblock body_content %}
+
+
+
+
+{% comment %} ================================================================= {% endcomment %}
+ {% comment %} <section id="breadcrumbs" class="breadcrumbs">
       <div class="breadcrumb-hero">
         <div class="container">
           <div class="breadcrumb-hero">
             <h2 style="text-align: center;">Profile Page</h2>
             {% if user.profile.id %}
                 <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:edit_profile_page' user.profile.id %}">Edit Profile Page</a></h3>
+                {% if page_user.user.type == 'DOCTOR'%}
+                <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:edit_doctor_page' user.profile.id %}">Edit Doctor Page</a></h3>
+                {% endif %}
                 <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:change_password' %}">Edit Password</a></h3>
             {% endif %}
           </div>
@@ -40,13 +203,11 @@
                 <p>No bio</p>
           {% endif %}
           <p class="small text-muted">
-            {% comment %} {% if page_user.website_url %}
-              <a href="{{page_user.website_url}}"> Website</a>
-            {% endif %} {% endcomment %}
             <div class="social-links">
                 <a href="https://twitters.com/#"><i class="icofont-twitter"></i></a>
                 <a href="https://facebook.com/#"><i class="icofont-facebook"></i></a>
                 <a href="https://instagram.com/#"><i class="icofont-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
               </div>
           </p>
         </div>
@@ -54,5 +215,4 @@
     </div>
   </div>
   </section>
-</main>
-{% endblock body_content %}
+</main> {% endcomment %}
