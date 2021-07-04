@@ -12,3 +12,4 @@ wincertstore==0.2
 djangorestframework==3.11.2
 dj-database-url==0.5.0
 pillow==8.0.1
+django-bootstrap3
