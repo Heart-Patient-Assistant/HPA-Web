@@ -76,6 +76,25 @@ def editprofile(request):
     return Response(data)
 
 
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticatedOrReadOnly])
+def getProfile(request):
+    response={}
+    token=request.auth
+    try:
+        user = Token.objects.get(key=token).user
+        profile = Profile.objects.get(user=user)
+        response['email'],response['first_name'],response['last_name'] = user.email, user.first_name, user.last_name
+        response['location']=profile.Location
+        response['bio']=profile.bio
+        response['web_url']=profile.website_url
+        response['birth_data']=profile.birth_date
+
+
+    except :
+        response['error'] = 'unvalaid token'
+    return Response(response)
+        
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
