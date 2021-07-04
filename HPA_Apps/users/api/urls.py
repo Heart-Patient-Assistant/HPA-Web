@@ -16,4 +16,6 @@ urlpatterns = [
     path("signup/", views.createaccount, name="createaccount"),
     path("signin/", CustomAuthToken.as_view(), name="signin"),
     path("editprofile/", views.editprofile, name="edit"),
+    path("getprofile/", views.getProfile, name="getprofile"),
+
 ]
