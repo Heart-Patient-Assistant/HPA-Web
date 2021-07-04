@@ -17,3 +17,8 @@ class MLpredictionserializer(serializers.Serializer):
     slope = serializers.IntegerField()
     ca = serializers.IntegerField()
     thal = serializers.IntegerField()
+
+class EgcSerializer(serializers.Serializer):
+
+    ecgheader=serializers.FileField()
+    ecgdata=serializers.FileField()
