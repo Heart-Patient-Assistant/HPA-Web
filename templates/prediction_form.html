@@ -12,7 +12,7 @@
                         <div class="breadcrumb-hero">
                             <h2 style="text-align: left;">Get Prediction</h2>
                             <div class="form-group">
-                                <form action="" method="post">  
+                                <form enctype="multipart/form-data" action="" method="post" >  
                                     {% csrf_token %}
                                     {{ form.as_p }}
                                     <input type="submit" name="" value="predict" class= "btn btn-secondary">
