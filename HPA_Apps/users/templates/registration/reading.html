@@ -1,0 +1,87 @@
+ {% extends 'base.html' %}
+  {% load static %}
+  {% block title %}Sensor Reading{% endblock %}
+  <body>
+    {% block content %}
+    {% if object_list %}
+    <div class="col-md-8" style="margin:100 auto;">
+      <canvas id="myChart" width="500" height="400"></canvas>
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for reading in object_list%} '{{ reading.Time }}', {% endfor%}],
+        datasets: [{
+            label: 'Heart Rate',
+            data: [{% for reading in object_list%} '{{ reading.HeartRate }}', {% endfor %}],
+            spanGaps: true,
+            fill : true,
+            lineTension: 0.1,
+            backgroundColor: [
+                "rgba(225,0,0,0.4)"
+            ],
+            borderColor: "red",
+            borderCapStyle: 'square',
+            borderJoinStyle: 'miter',
+            pointBorderColor: "black",
+            pointBackgroundColor: "white",
+            pointBorderWidth: 1,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: "yellow",
+            pointHoverBorderColor: "brown",
+            pointHoverBorderWidth: 2,
+            pointRadius: 4,
+            pointHitRadius: 10,
+            borderWidth: 1
+        },{
+          label: 'SpO2',
+          data: [{% for reading in object_list%} '{{ reading.SpO2 }}', {% endfor %}],
+          spanGaps: false,
+          fill: false,
+          backgroundColor: [
+                "rgba(167,105,0,0.4)"],
+          borderColor: "rgb(167, 105, 0)",
+          borderCapStyle: 'butt',
+          borderJoinStyle: 'miter',
+          pointBorderColor: "white",
+          pointBackgroundColor: "black",
+          pointBorderWidth: 1,
+          pointHoverRadius: 8,
+          pointHoverBackgroundColor: "brown",
+          pointHoverBorderColor: "yellow",
+          pointHoverBorderWidth: 2,
+          pointRadius: 4,
+          pointHitRadius: 10,
+          borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+  <div  style="margin:100px, padding:50px">
+    <a style="margin:30px;center" class="btn btn-success btn-lg btn-block" href="{% url 'users:show_profile' user.profile.id %}" role="button">Return to profile</a>
+  </div>
+	  </div>
+    {% else %}
+      <main id="main">
+        <br>
+        <h1>No Readings Stored</h1>
+        <a style="margin:30px;center" class="btn btn-success btn-lg btn-block" href="{% url 'users:show_profile' user.profile.id %}" role="button">Return to profile</a>
+      </main>
+    {% endif %}
+  {% endblock %}
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+  </body>

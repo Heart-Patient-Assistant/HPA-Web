@@ -12,7 +12,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="block text-center">
+				{% if page_user.user.type == 'DOCTOR' %}
           <span class="text-white">Doctor Details</span>
+				{% else %}
+					<span class="text-white">Patient Details</span>
+				{% endif %}
           <h1 class="text-capitalize mb-5 text-lg">{{ page_user.user.get_full_name}}'s Profile page</h1>
         </div>
       </div>
@@ -33,7 +37,9 @@
 
 					<div class="info-block mt-4">
 						<h4 class="mb-0">{{ page_user.user.get_full_name}}</h4>
+						{% if page_user.user.type == 'DOCTOR' %}
 						<h6 class="mb-0">{{ profile.academic_Title}}</h4>
+						{% endif %}
 						<h6 class="mb-0"><p>{{ profile.bio}}</p></h4>
 						<ul class="list-inline mt-4 doctor-social-links">
 							<a href="{{ profile.twitter_url }}"><i class="icofont-twitter"></i></a>
@@ -49,15 +55,20 @@
 				<div class="doctor-details mt-4 mt-lg-0">
 					<h2 class="text-md">Introducing myself</h2>
 					<div class="divider my-4"></div>
-					<p>
-						{% if profile.bio %}
-            		<p>{{ profile.employment_history }}</p>
-          	{% else %}
-                <p>No emoloyment history</p>
-          	{% endif %}
-					</p>
-					<a href="appoinment.html" class="btn btn-danger">Make an Appoinment<i class="icofont-simple-right ml-2  "></i></a><br><br>
+					{% if page_user.user.type == 'DOCTOR' %}
+						<p>
+							{% if profile.employment_history %}
+									<p>{{ profile.employment_history }}</p>
+							{% else %}
+									<p>No emloyment history</p>
+							{% endif %}
+						</p>
+					<a href="{% url 'users:appointment-create' user.profile.id%}" class="btn btn-danger">Make an Appoinment<i class="icofont-simple-right ml-2  "></i></a><br><br>
 					<a href="{% url 'users:show_profile_posts' user.profile.id %}" class="btn btn-primary">See Doctor's Posts<i class="icofont-simple-right ml-2  "></i></a>
+					{% else %}
+							<p>Sick guy</p>
+					<a href="{% url 'users:hardware:reading' user.profile.id %}" class="btn btn-primary">Get Readings<i class="icofont-simple-right ml-2  "></i></a>
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -66,6 +77,60 @@
 
 <div
 style="background-color: lightgray;">
+
+
+<section class="section doctor-skills">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4">
+			{% if page_user.user.type == 'DOCTOR' %}
+				<h3>My skills</h3>
+				<div class="divider my-4"></div>
+				<p>{{ profile.experience }}</p>
+			</div>
+			<div class="col-lg-4">
+				<div class="skill-list">
+					<h5 class="mb-4">Expertise area</h5>
+					<ul class="list-unstyled department-service">
+					{% if profile.split_speciality != None %}
+					{% for Speciality in profile.split_speciality %}
+						<li><i class="icofont-check mr-2"></i>{{Speciality|cut:"'"|cut:"]"|cut:"["|cut:" "}}</li>
+					{% endfor %}
+					{% endif %}
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="sidebar-widget  gray-bg p-4">
+					<h5 class="mb-4">Make Appoinment</h5>
+
+					<ul class="list-unstyled lh-35">
+					  <li class="d-flex justify-content-between align-items-center">
+					    <a href="#">Monday - Friday</a>
+					    <span>9:00 - 17:00</span>
+					  </li>
+					  <li class="d-flex justify-content-between align-items-center">
+					    <a href="#">Saturday</a>
+					    <span>9:00 - 16:00</span>
+					  </li>
+					  <li class="d-flex justify-content-between align-items-center">
+					    <a href="#">Sunday</a>
+					    <span>Closed</span>
+					  </li>
+					</ul>
+
+					<div class="sidebar-contatct-info mt-4">
+						<p class="mb-0">Need Urgent Help?</p>
+						<h3 class="text-color-2">+23-4565-65768</h3>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>
+</div>
+{% endblock body_content %}
 
 {% comment %} <section class="section doctor-qualification gray-bg">
 	<div class="container">
@@ -109,110 +174,3 @@ style="background-color: lightgray;">
 		</div>
 	</div>
 </section> {% endcomment %}
-
-
-<section class="section doctor-skills">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-4">
-				<h3>My skills</h3>
-				<div class="divider my-4"></div>
-				<p>{{ profile.experience }}</p>
-			</div>
-			<div class="col-lg-4">
-				<div class="skill-list">
-					<h5 class="mb-4">Expertise area</h5>
-					<ul class="list-unstyled department-service">
-					{% if profile.split_speciality != None %}
-					{% for Speciality in profile.split_speciality %}
-						<li><i class="icofont-check mr-2"></i>{{Speciality|cut:"'"|cut:"]"|cut:"["|cut:" "}}</li>
-					{% endfor %}
-					{% endif %}
-					</ul>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="sidebar-widget  gray-bg p-4">
-					<h5 class="mb-4">Make Appoinment</h5>
-
-					<ul class="list-unstyled lh-35">
-					  <li class="d-flex justify-content-between align-items-center">
-					    <a href="#">Monday - Friday</a>
-					    <span>9:00 - 17:00</span>
-					  </li>
-					  <li class="d-flex justify-content-between align-items-center">
-					    <a href="#">Saturday</a>
-					    <span>9:00 - 16:00</span>
-					  </li>
-					  <li class="d-flex justify-content-between align-items-center">
-					    <a href="#">Sunday</a>
-					    <span>Closed</span>
-					  </li>
-					</ul>
-
-					<div class="sidebar-contatct-info mt-4">
-						<p class="mb-0">Need Urgent Help?</p>
-						<h3 class="text-color-2">+23-4565-65768</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-</div>
-{% endblock body_content %}
-
-
-
-
-{% comment %} ================================================================= {% endcomment %}
- {% comment %} <section id="breadcrumbs" class="breadcrumbs">
-      <div class="breadcrumb-hero">
-        <div class="container">
-          <div class="breadcrumb-hero">
-            <h2 style="text-align: center;">Profile Page</h2>
-            {% if user.profile.id %}
-                <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:edit_profile_page' user.profile.id %}">Edit Profile Page</a></h3>
-                {% if page_user.user.type == 'DOCTOR'%}
-                <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:edit_doctor_page' user.profile.id %}">Edit Doctor Page</a></h3>
-                {% endif %}
-                <h3 style="text-align: center; font-size:18px;"><a href="{% url 'users:change_password' %}">Edit Password</a></h3>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-
-      <div class="card mb-3">
-    <div class="row no-gutters">
-      <div class="col-md-2">
-        {% if page_user.profile_pic  %}
-          <img src="{{ page_user.profile_pic.url }}" class="rounded-circle float-left" alt="profile_picture" width="200" height="200">
-        {% else %}
-          <img src="{% static '\img\Unknown_person.jpg' %}" class="rounded-circle float-left" alt="profile_picture" width="200" height="200">
-        {% endif %}
-      </div>
-    <div class="col-md-10">
-        <div class="card-body">
-          <h5 class="card-title">
-            {{ page_user.user.first_name }}
-            {{ page_user.user.last_name }}
-          </h5>
-          {% if profile.bio %}
-            <p>{{ profile.bio }}</p>
-          {% else %}
-                <p>No bio</p>
-          {% endif %}
-          <p class="small text-muted">
-            <div class="social-links">
-                <a href="https://twitters.com/#"><i class="icofont-twitter"></i></a>
-                <a href="https://facebook.com/#"><i class="icofont-facebook"></i></a>
-                <a href="https://instagram.com/#"><i class="icofont-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
-              </div>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  </section>
-</main> {% endcomment %}

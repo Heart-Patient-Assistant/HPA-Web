@@ -11,9 +11,7 @@ from .views import (
     AboutView,
     EditDoctorProfile,
     ShowProfilePostsView,
-    # AddDoctorSpeciality,
     AppointmentCreateView,
-
 )
 from . import views
 
@@ -23,7 +21,6 @@ router.register("profile", views.UserViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    # path("login", views.UserLoginView.as_view()),
     path("upladmedicalrecord", views.UploadMedicalData.as_view()),
     path("signup/", SignUpView.as_view(), name="signup"),
     path("about/", AboutView.as_view(), name="about"),
@@ -31,6 +28,10 @@ urlpatterns = [
     path("password/", PasswordsChangeView.as_view(), name="change_password"),
     path("password/password_success/", PasswordSuccessView, name="password_success"),
     path("<int:pk>/profile", ShowProfileView.as_view(), name="show_profile"),
+    path(
+        "<int:pk>/profile/sensor/",
+        include("HPA_Apps.hardware.urls", namespace="hardware"),
+    ),
     path(
         "<int:pk>/profile/posts",
         ShowProfilePostsView.as_view(),
@@ -52,7 +53,17 @@ urlpatterns = [
     # path(
     #     "<int:pk>/add_speciality", AddDoctorSpeciality.as_view(), name="add_speciality"
     # ),
-    path("appointment/create", AppointmentCreateView.as_view(), name="appointment-create"),
-    path("appointment/p/", views.AppointmentsForAPatientView.as_view(), name="patient-appointments"),
-    path("appointment/d/", views.AppointmentsForADoctorView.as_view(), name="doctor-appointments"),
+    path(
+        "appointment/create", AppointmentCreateView.as_view(), name="appointment-create"
+    ),
+    path(
+        "<int:pk>/appointment/p/",
+        views.AppointmentsForAPatientView.as_view(),
+        name="patient-appointments",
+    ),
+    path(
+        "appointment/d/",
+        views.AppointmentsForADoctorView.as_view(),
+        name="doctor-appointments",
+    ),
 ]

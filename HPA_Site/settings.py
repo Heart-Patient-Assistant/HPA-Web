@@ -26,7 +26,7 @@ SECRET_KEY = "d8p&9u6(602vbnpfc_e)4ppci=ip5zq__fyuq1mtf7ey_l+(4g"
 # DEBUG = True
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    'bootstrap3',
+    "bootstrap3",
     # 3rd party apps
     "rest_framework",
     "rest_framework.authtoken",
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "HPA_Apps.services",
     "HPA_Apps.blogs",
     "HPA_Apps.feedback",
+    "HPA_Apps.hardware",
 ]
 
 REST_FRAMEWORK = {
@@ -156,6 +157,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-ALLOWED_HOSTS = ["*"]
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"

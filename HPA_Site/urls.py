@@ -26,6 +26,7 @@ from django.conf.urls.static import static
 api_urlpatterns = [
     path("users/", include("HPA_Apps.users.api.urls", namespace="users_api")),
     path("blog/", include("HPA_Apps.blogs.api.urls", namespace="blogs_api")),
+    path("users/", include("HPA_Apps.hardware.api.urls", namespace="hardware_api")),
 ]
 
 
