@@ -46,7 +46,7 @@ class PostApiListView(generics.ListCreateAPIView):
         if query:
             queryset_list = queryset_list.filter(
                 Q(title__icontains=query)
-                | Q(content__icontains=query)
+                | Q(body__icontains=query)
                 | Q(author__first_name__icontains=query)
                 | Q(author__last_name__icontains=query)
             ).distinct()
