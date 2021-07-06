@@ -57,7 +57,7 @@ urlpatterns = [
         "appointment/create", AppointmentCreateView.as_view(), name="appointment-create"
     ),
     path(
-        "<int:pk>/appointment/p/",
+        "appointment/p/",
         views.AppointmentsForAPatientView.as_view(),
         name="patient-appointments",
     ),

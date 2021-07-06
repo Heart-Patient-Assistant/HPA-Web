@@ -179,7 +179,7 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
     def get_initial(self):
         initial = super().get_initial()
         initial["patient"] = self.request.user
-        initial["doctor"] = User.objects.get(pk=self.kwargs["pk"])
+        # initial["doctor"] = User.objects.get(pk=self.kwargs["pk"])
         return initial
 
     def post(self, request, *args, **kwargs):

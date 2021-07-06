@@ -174,6 +174,7 @@ class AppointmentForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "patient": forms.HiddenInput(),
+            # "doctor": forms.HiddenInput(),
         }
 
     def __init__(self, *args, **kwargs):
