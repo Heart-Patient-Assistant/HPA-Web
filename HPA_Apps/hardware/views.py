@@ -13,7 +13,7 @@ from HPA_Apps.users.models import User
 
 class SensorReading(ListView):
     model = Sensor
-    template_name = "registration/sensor/reading.html"
+    template_name = "registration/reading.html"
 
 
 # @login_required

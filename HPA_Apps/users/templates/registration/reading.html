@@ -3,7 +3,7 @@
   {% block title %}Sensor Reading{% endblock %}
   <body>
     {% block content %}
-    {% if object_list %}
+    {% if object_list == None %}
     <div class="col-md-8" style="margin:100 auto;">
       <canvas id="myChart" width="500" height="400"></canvas>
 <script>
