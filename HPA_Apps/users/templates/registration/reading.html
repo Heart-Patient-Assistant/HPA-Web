@@ -3,7 +3,7 @@
   {% block title %}Sensor Reading{% endblock %}
   <body>
     {% block content %}
-    {% if object_list == None %}
+    {% if object_list %}
     <div class="col-md-8" style="margin:100 auto;">
       <canvas id="myChart" width="500" height="400"></canvas>
 <script>
@@ -11,10 +11,10 @@ var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: [{% for reading in object_list%} '{{ reading.Time }}', {% endfor%}],
+        labels: [{% for reading in object_list %} '{{ reading.Time }}', {% endfor%}],
         datasets: [{
             label: 'Heart Rate',
-            data: [{% for reading in object_list%} '{{ reading.HeartRate }}', {% endfor %}],
+            data: [{% for reading in object_list %} '{{ reading.HeartRate }}', {% endfor %}],
             spanGaps: true,
             fill : true,
             lineTension: 0.1,
@@ -66,7 +66,7 @@ var myChart = new Chart(ctx, {
 });
 </script>
   <div  style="margin:100px, padding:50px">
-    <a style="margin:30px;center" class="btn btn-success btn-lg btn-block" href="{% url 'users:show_profile' user.profile.id %}" role="button">Return to profile</a>
+    <a style="margin:30px;center" class="btn btn-success btn-lg btn-block" href="{% url 'users:show_profile' page_user.user.profile.id %}" role="button">Return to profile</a>
   </div>
 	  </div>
     {% else %}

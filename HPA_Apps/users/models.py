@@ -8,6 +8,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 # from HPA_Apps.blogs.models import Post
 
 
@@ -113,7 +115,7 @@ class Profile(models.Model):
     speciality = models.CharField(max_length=255, null=True, blank=True)
     employment_history = models.TextField(null=True, blank=True)
     experience = models.TextField(null=True, blank=True)
-    # phone_number= ..
+    phone_number = PhoneNumberField(null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     Location = models.CharField(max_length=30, blank=True)
     # doctor_resp = ..

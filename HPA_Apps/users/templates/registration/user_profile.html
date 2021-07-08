@@ -64,7 +64,8 @@
 							{% endif %}
 						</p>
 					<a href="{% url 'users:appointment-create' user.profile.id%}" class="btn btn-danger">Make an Appoinment<i class="icofont-simple-right ml-2  "></i></a><br><br>
-					<a href="{% url 'users:show_profile_posts' user.profile.id %}" class="btn btn-primary">See Doctor's Posts<i class="icofont-simple-right ml-2  "></i></a>
+					<a href="{% url 'users:show_profile_posts' user.profile.id %}" class="btn btn-primary">See Doctor's Posts<i class="icofont-simple-right ml-2  "></i></a><br><br>
+          <a href="{% url 'users:hardware:reading' user.profile.id %}" class="btn btn-success ">Get Readings<i class="icofont-simple-right ml-2  "></i></a>
 					{% else %}
 							<p>Sick guy</p>
 					<a href="{% url 'users:hardware:reading' user.profile.id %}" class="btn btn-primary">Get Readings<i class="icofont-simple-right ml-2  "></i></a>
@@ -121,7 +122,11 @@ style="background-color: lightgray;">
 
 					<div class="sidebar-contatct-info mt-4">
 						<p class="mb-0">Need Urgent Help?</p>
-						<h3 class="text-color-2">+23-4565-65768</h3>
+            {% if profile.phone_number %}
+							<h3 class="text-color-2">{{profile.phone_number}}</h3>
+						{% else %}
+							<h3 class="text-color-2">Phone number not provided</h3>
+						{% endif %}
 					</div>
 				</div>
 				{% endif %}

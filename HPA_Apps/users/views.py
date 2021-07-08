@@ -94,6 +94,9 @@ class ShowProfilePostsView(ListView):
     model = Post
     template_name = "registration/user_profile_posts.html"
 
+    def get_queryset(self):
+        pk = self.kwargs["pk"]
+        return Post.objects.filter(author=pk)
     # def get(self, request, pk, *args, **kwargs):
     #
     #     # print(pk)

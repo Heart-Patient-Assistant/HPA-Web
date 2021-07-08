@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "crispy_forms",
+    "phonenumber_field",
     #'taggit_autocomplete_modified',
     #'pagedown',
     "taggit",

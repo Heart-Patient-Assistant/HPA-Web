@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt  # , csrf_protect,
 from django.views.generic import ListView
 import json
+from django.shortcuts import get_object_or_404
+from HPA_Apps.users.models import Profile
 
 # from django.contrib.auth.decorators import login_required
 
@@ -15,6 +17,15 @@ class SensorReading(ListView):
     model = Sensor
     template_name = "registration/reading.html"
 
+    def get_queryset(self):
+        pk = self.kwargs["pk"]
+        return Sensor.objects.filter(user=pk)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SensorReading, self).get_context_data(*args, **kwargs)
+        page_user = get_object_or_404(Profile, id=self.kwargs["pk"])
+        context["page_user"] = page_user
+        return context
 
 # @login_required
 @csrf_exempt
