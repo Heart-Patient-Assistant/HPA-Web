@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    "bootstrap3",
     # 3rd party apps
+    "drf_yasg",
+    "bootstrap3",
     "rest_framework",
     "rest_framework.authtoken",
     "crispy_forms",
