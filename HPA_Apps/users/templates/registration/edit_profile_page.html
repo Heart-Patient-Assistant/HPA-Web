@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
+{% load bootstrap3 %}
 {%block title%}
   Edit Profile Page
 {%endblock title%}
 
 {% block body_content %}
-<main id="main">
+<div class="container" style="position:relative;margin-top:70px;">
+    <h2>Edit Profile Page</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Edit Profile" class="btn btn-success btn-lg btn-block">
+    </form>
+</div>
+{% endblock body_content %}
+<!-- <main id="main">
  <section id="breadcrumbs" class="breadcrumbs">
       <div class="breadcrumb-hero">
         <div class="container">
@@ -29,5 +39,4 @@
   You're not allowed to perform this action
 {% endif %}
 </section>
-</main>
-{% endblock body_content %}
+</main> -->
