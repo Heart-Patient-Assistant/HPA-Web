@@ -46,7 +46,7 @@ class PostApiListView(generics.ListCreateAPIView):
         if query:
             queryset_list = queryset_list.filter(
                 Q(title__icontains=query)
-                | Q(content__icontains=query)
+                | Q(body__icontains=query)
                 | Q(author__first_name__icontains=query)
                 | Q(author__last_name__icontains=query)
             ).distinct()
@@ -61,14 +61,18 @@ class PostApiDetailView(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["POST", "GET"])
     def comments(self, request, pk):
-        post = models.Post.objects.get(pk=pk)
+        # get_object_or_404(Comment, pk=comment_id)
+        post = get_object_or_404(Post, pk=pk)
         if request.method == "GET":
             self.serializer_class = CommentSerializer
-            queryset = models.Comment.objects.filter(post=post)
-            serializer = CommentSerializer(
-                queryset, many=True, context={"request": request}
-            )
-            return Response(serializer.data)
+            if models.Comment.objects.filter(post=post):
+                queryset = models.Comment.objects.filter(post=post)
+                serializer = CommentSerializer(
+                    queryset, many=True, context={"request": request}
+                )
+                return Response(serializer.data)
+            else:
+                return Response({"message": "There is no comment"})
         else:
             self.serializer_class = CommentSerializer
             queryset = models.Comment.objects.filter(post=post)
