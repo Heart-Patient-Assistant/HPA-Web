@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+{% block title %}
+Recipe
+{% endblock title %}
+{% block body_content %}
+
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static '\img\meal8.PNG' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single8.html">Mushroom Cream Pasta</a>
+              </h2>
+
+
+              <div class="entry-content">
+                <h3 class="sidebar-title">Method</h3>
+
+
+                <p>
+                  1-Bring a large pot of water to a boil then Cook Rigatoni according to the packaging instructions.
+                  While it’s cooking make the sauce.
+                </p>
+
+                <p>
+                  2-Heat the oil slightly in a large skillet and Sauté sliced mushrooms until slightly browned then Add
+                  garlic and sauté for couple of minutes longer
+                </p>
+                <p>
+                  3-Add cashew cream and half of the water and cook until it starts bubbling.
+                </p>
+                <p>
+                  4-With the heat the cashew cream thickens so you’ll need to adjust it with the rest of the water, you
+                  might need to add a little more or a little less.
+                </p>
+                <p>
+                  5-Once you adjust the thickness of the sauce, season with sea salt and pepper.
+                </p>
+                <p>
+                  6-Turn off the heat. Add the sauce into cooked Rigatoni mixing well.
+                </p>
+                <p>
+                  7-Add arugula and parsley. Serve immediately, enjoy!
+                </p>
+
+
+
+
+
+            </article><!-- End blog entry -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+
+
+            <h3 class="sidebar-title">INGREDIENTS</h3>
+            <div class="sidebar-item categories">
+              <ul>
+                <li><a>1 pack 500g Rigatoni </a></li>
+                <li><a>500g button mushroom (sliced)</a></li>
+                <li><a>generous handful arugula (optional)</a></li>
+                <li><a>200g Cashew Cream </a></li>
+                <li><a>parsley</a></li>
+                <li><a>3 garlic cloves, minced</a></li>
+                <li><a>olive oil </a></li>
+                <li><a>1cup water</a></li>
+                <li><a>sea salt, pepper</a></li>
+                <li><a>juice of 2 lemon</a></li>
+
+              </ul>
+
+            </div><!-- End sidebar categories-->
+
+
+
+
+          </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+      </div>
+      <a href="{% url 'blogs:recipes' %}" class="btn btn-success btn-lg btn-block"> Go Back To recipes </a>
+      <br>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+{% endblock body_content %}

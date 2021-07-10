@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+{% block title %}
+Recipe
+{% endblock title %}
+{% block body_content %}
+
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static '\img\meal9.PNG' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'blogs:recipes9' %}">Spinach with Mushrooms and Cream</a>
+              </h2>
+
+
+              <div class="entry-content">
+                <h3 class="sidebar-title">Method</h3>
+
+
+                <p>
+                  1-Heat the oil in a saucepan, sauté the onions and garlic.
+                </p>
+
+                <p>
+                  2-Add the spices and sauté until fragrant.
+                </p>
+                <p>
+                  3-Add the mushrooms and sauté for 5 minutes.
+                </p>
+                <p>
+                  4-Add the spinach and let it wilt, then add coconut milk and cream and season with salt and pepper to
+                  taste.
+                </p>
+                <p>
+                  5-Simmer for few minutes and turn off the heat.
+                </p>
+                <p>
+                  6-Serve it with rice or lentils
+                </p>
+
+
+
+
+            </article><!-- End blog entry -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+
+
+            <h3 class="sidebar-title">INGREDIENTS</h3>
+            <div class="sidebar-item categories">
+              <ul>
+                <li><a>1tbs olive oil </a></li>
+                <li><a>1 large onion</a></li>
+                <li><a>2 garlic cloves</a></li>
+                <li><a>1/2tsp turmeric</a></li>
+                <li><a>1/2tsp cumin</a></li>
+                <li><a>1/2tsp ground coriander</a></li>
+                <li><a>200g mushrooms sliced</a></li>
+                <li><a>500g fresh spinach </a></li>
+                <li><a>sea salt, pepper</a></li>
+                <li><a>1/2cup coconut milk </a></li>
+                <li><a>1tbs Cashew Cream </a></li>
+
+              </ul>
+
+            </div><!-- End sidebar categories-->
+
+
+
+
+          </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+      </div>
+      <a href="{% url 'blogs:recipes' %}" class="btn btn-success btn-lg btn-block"> Go Back To recipes </a>
+      <br>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+{% endblock body_content %}

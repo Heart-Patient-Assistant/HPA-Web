@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+{% block title %}
+Recipe
+{% endblock title %}
+{% block body_content %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static '\img\meal2.PNG' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'blogs:recipes2' %}">Herbed Couscous with Grilled Zucchini</a>
+              </h2>
+
+
+              <div class="entry-content">
+                <h3 class="sidebar-title">Method</h3>
+
+
+                <p>
+                 1-Place the couscous in a deep bowl, season with salt and pepper, add boiling water. Cover it and let it stand while you prepare the rest.                 </p>
+
+                <p>
+                  2-Preheat the oven to 190C. Drain and rinse the chickpeas, season it with sea salt and pepper, add 1tsp of olive oil, toss it well, spread it on the baking tray and roast it in the oven for 10, 15 minutes.
+                </p>
+                <p>
+                  3-Chop all the herbs and spring onions finely.
+                </p>
+                <p>
+                  4-With the fork fluff the couscous, add 1tbs olive oil, herbs and lemon juice mixing well. Adjust the seasoning to taste
+                </p>
+                <p>
+                 5-Slice the zucchini length ways into 1/2cm thick slices. Season it with sea salt and pepper and rub it with 1tsp of olive oil. Grill it on a hot griddle or a nonstick pan.
+                 </p>
+                 <p>
+                  6-Mix the arugula and cherry tomatoes with the dressing
+                </p>
+                <p>
+                  7-To arrange the plates, divide the couscous and salad greens into two bowls or plates. Add chickpeas to the couscous and top it with grilled zucchini. Add a big dollop of hummus on the side.
+                </p>
+
+
+
+
+
+            </article><!-- End blog entry -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+
+
+              <h3 class="sidebar-title">INGREDIENTS</h3>
+              <div class="sidebar-item categories">
+                <ul>
+                  <li><a >1cup couscous</a></li>
+
+                  <li><a >2cups boiling water</a></li>
+                  <li><a >sea salt, pepper</a></li>
+                  <li><a >1/2can chickpeas</a></li>
+                  <li><a>1cup mixed herbs (mint, coriander, dill)</a></li>
+                  <li><a >1 spear spring onion</a></li>
+                  <li><a >2 medium zucchini</a></li>
+                  <li><a >handfull arugula</a></li>
+                  <li><a>cherry tomatoes</a></li>
+                  <li><a >1tbs herbed dressing</a></li>
+                  <li><a >3tbs olive oil</a></li>
+                  <li><a >2tbs Hummus to serve</a></li>
+                  <li><a >juice of 1 lemon</a></li>
+                </ul>
+
+              </div><!-- End sidebar categories-->
+
+
+
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
+
+      </div>
+      <a href="{% url 'blogs:recipes' %}" class="btn btn-success btn-lg btn-block"> Go Back To recipes </a>
+      <br>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+{% endblock body_content %}
+

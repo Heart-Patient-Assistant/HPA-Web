@@ -13,9 +13,9 @@
             <h2 style="text-align: center;">Blog</h2>
           <div class= "breadcrumb-hero"><br>
             {% if user.is_authenticated %}
-            <h3 style="text-align: center;"><a href="{% url 'blogs:post_new' %}">New Post</a></h3>
+            <h3 style="text-align: center;"><a href="{% url 'blogs:post_new' %}" class="btn btn-primary btn-lg btn-block">New Post</a></h3>
             {% else %}
-            <h3 style="text-align: center;"><a href="{% url 'login' %}">Login to post</a></h3>
+            <h3 style="text-align: center;"><a href="{% url 'login' %}" class="btn btn-primary btn-lg btn-block">Login to post</a></h3>
             {% endif %}
           </div>
           </div>
@@ -25,10 +25,10 @@
     </section>
 
     <section id="blog" class="blog">
+    <div class="container">
+    <div class="row">
     {% for post in object_list %}
-      <div class="container">
 
-        <div class="row">
 
           <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
             <article class="entry">
@@ -65,15 +65,8 @@
 
             </article><!-- End blog entry -->
           </div>
-          </div>
           {% endfor %}
-          <div class="blog-pagination" data-aos="fade-up">
-          <ul class="justify-content-center">
-            <li class="disabled"><i class="icofont-rounded-left"></i></li>
-            <li><a href="#">1</a></li>
-            <li class="active"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
+          </div>
           </ul>
         </div>
 

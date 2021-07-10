@@ -54,7 +54,7 @@ urlpatterns = [
     #     "<int:pk>/add_speciality", AddDoctorSpeciality.as_view(), name="add_speciality"
     # ),
     path(
-        "<int:pk>/appointment/create",
+        "appointment/create",
         AppointmentCreateView.as_view(),
         name="appointment-create",
     ),

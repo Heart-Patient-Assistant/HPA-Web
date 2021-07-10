@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+{% block title %}
+Recipe
+{% endblock title %}
+{% block body_content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static '\img\meal7.PNG' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'blogs:recipes7' %}">Oven Roasted Potatoes</a>
+              </h2>
+
+
+              <div class="entry-content">
+                <h3 class="sidebar-title">Method</h3>
+
+
+                <p>
+                  1-In medium bowl, marinate potato cubes with rosemary, oregano, garlic powder, pepper, paprika, pinch
+                  of lemon juice, and 1/2 tablespoon of olive oil, tossing to combine.
+                </p>
+
+                <p>
+                  2-Preheat your oven to 350 degrees and roast potatoes on top oven rack for 20 minutes - 30 minutes or
+                  until crispy and brown
+                </p>
+                <p>
+                  3-Serve with a dip for a snack, with white rice for lunch, or over green salad for dinner
+                </p>
+
+
+
+
+
+            </article><!-- End blog entry -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+
+
+            <h3 class="sidebar-title">INGREDIENTS</h3>
+            <div class="sidebar-item categories">
+              <ul>
+                <li><a>2 red potatoes, cut into fourths (3/4-inch chunks)</a></li>
+                <li><a>1 teaspoon dried rosemary leaves, crushed</a></li>
+                <li><a>1 teaspoon dried oregano</a></li>
+                <li><a>1 teaspoon of garlic powder</a></li>
+                <li><a>1/2 teaspoon of paprika </a></li>
+                <li><a>1/2 teaspoon of black pepper</a></li>
+                <li><a>1/2 teaspoon salt & olive oil - (optional)</a></li>
+              </ul>
+
+            </div><!-- End sidebar categories-->
+
+
+
+
+          </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+      </div>
+      <a href="{% url 'blogs:recipes' %}" class="btn btn-success btn-lg btn-block"> Go Back To recipes </a>
+      <br>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+{% endblock body_content %}

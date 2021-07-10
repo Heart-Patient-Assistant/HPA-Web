@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load bootstrap3 %}
 {%block title%}
   Give Feedback
 {%endblock title%}
 
-       
+
 {% block body_content %}
 
-    
+
     <main id="main">
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
@@ -21,19 +22,19 @@
             <div class="form-group">
             <form action="" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" name="" value="Give Feedback" class= "btn btn-secondary">
+            {% bootstrap_form form %}
+            <input type="submit" name="" value="Give Feedback" class= "btn btn-success btn-lg btn-block">
             </form>
             </div>
               </div>
-          
-    </div>  
+
+    </div>
             </div>
           </div>
     </section>
     <!-- End Services Section -->
 
   </main>
-        
-   
+
+
 {% endblock body_content %}

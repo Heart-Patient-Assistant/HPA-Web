@@ -97,6 +97,7 @@ class ShowProfilePostsView(ListView):
     def get_queryset(self):
         pk = self.kwargs["pk"]
         return Post.objects.filter(author=pk)
+
     # def get(self, request, pk, *args, **kwargs):
     #
     #     # print(pk)
@@ -182,7 +183,7 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
     def get_initial(self):
         initial = super().get_initial()
         initial["patient"] = self.request.user
-        initial["doctor"] = User.objects.get(pk=self.kwargs["pk"])
+        # initial["doctor"] = User.objects.get(pk=self.kwargs["pk"])
         return initial
 
     def post(self, request, *args, **kwargs):

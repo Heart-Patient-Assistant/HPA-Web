@@ -5,6 +5,7 @@
 {%endblock title%}
 
 {% block body_content %}
+<br><br>
 <main id="main">
 <section id="blog" class="blog">
       <div class="container">
@@ -64,8 +65,8 @@
               </div>
               </div>
               {% if user.id == post.author.id %}
-              <small><p><a href="{% url 'blogs:post_edit' post.pk %}">+Edit Blog Post</a></p></small>
-              <small><p><a href="{% url 'blogs:post_delete' post.pk %}">+Delete Blog Post</a></p></small>
+              <small><p><a href="{% url 'blogs:post_edit' post.pk %}" class="btn btn-warning btn-lg btn-block">+Edit Blog Post</a></p></small>
+              <small><p><a href="{% url 'blogs:post_delete' post.pk %}" class="btn btn-danger btn-lg btn-block">+Delete Blog Post</a></p></small>
               {% endif%}
               <hr>
               <form action="{% url 'blogs:like_post' post.pk%}" method="POST">
@@ -91,7 +92,7 @@
               {% if not post.comments.all %}
                 <p>No Comments Yet.. </p>
                 {% if user.is_authenticated %}
-                <p><a href="{% url 'blogs:add_comment' post.pk %}">Add One</a></p>
+                <p><a href="{% url 'blogs:add_comment' post.pk %}" class="btn btn-primary btn-lg">Add One</a></p>
                 {% else %}
                 <p><a href="{% url 'login' %}">Login</a> to comment</p>
                 {% endif %}

@@ -5,32 +5,28 @@
 {%endblock title%}
 
 {% block body_content %}
+<br><br>
 <main id="main">
 
     <section id="blog" class="blog">
     {% if object_list %}
     {% for post in object_list %}
       <div class="container">
-    {% comment %} {% if post.author.profile.id = 3 %} {% endcomment %}
 
         <div class="row">
 
           <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
             <article class="entry">
 
-            {% comment %} image to add in the post background {% endcomment %}
               {%if post.header_image%}
               <div class="entry-img">
                 <img src="{{post.header_image.url}}" alt="" class="img-fluid">
               </div>
               {% endif %}
 
-              {% comment %} header is post title and ref is the link to post detail {% endcomment %}
               <h2 class="entry-title">
                 <a href="{% url 'blogs:post_detail' post.pk %}"><p>{{post.title}}</p></a>
               </h2>
-
-              {% comment %} first list is the author and its link is the profile and second is the post_date {% endcomment %}
               <div class="entry-meta">
                 <ul>
                   <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href={% url 'users:show_profile' post.author.profile.id %}><p>{{post.author.get_full_name}}</p></a></li>

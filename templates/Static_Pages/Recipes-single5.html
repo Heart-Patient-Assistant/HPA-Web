@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+{% block title %}
+Recipe
+{% endblock title %}
+{% block body_content %}
+
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static '\img\meal5.PNG' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'blogs:recipes5' %}">Lentils With Herbs and Grilled Veggies</a>
+              </h2>
+
+
+              <div class="entry-content">
+                <h3 class="sidebar-title">Method</h3>
+
+
+                <p>
+                  1-Preheat the oven to 180C then Cut the aubergine, carrots and onions and tomatoes into cubes.
+                </p>
+
+                <p>
+                  2-Put them into a large bowl, add minced garlic, thyme, sea salt, pepper and a spoon of olive oil and
+                  Mix well and spread it on a baking sheet.
+                </p>
+                <p>
+                  3-Bake it for 20-30 minutes until slightly browned on the edges and the carrots are soft.
+                </p>
+                <p>
+                  4-In a large bowl mix the cooked lentils with grilled vegetables, add the herbs and the remaining
+                  olive oil.
+                </p>
+                <p>
+                  5-Season to taste with salt and pepper add a squeeze of lemon if you like.
+                </p>
+                <p>
+                  6-Serve it with Hummus or tahini and warm bread
+                </p>
+
+
+
+
+
+            </article><!-- End blog entry -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+
+
+            <h3 class="sidebar-title">INGREDIENTS</h3>
+            <div class="sidebar-item categories">
+              <ul>
+                <li><a>2 cups cooked dark lentils</a></li>
+                <li><a>1 medium aubergine</a></li>
+                <li><a>2 medium carrot</a></li>
+                <li><a>2 medium tomatoes</a></li>
+                <li><a>1 large white sweet onion</a></li>
+                <li><a>2 garlic cloves, minced</a></li>
+                <li><a>2tbs olive oil </a></li>
+                <li><a>few springs of thyme</a></li>
+                <li><a>sea salt, pepper</a></li>
+                <li><a>loosely packed cup of mixed chopped herbs (dill, parsley, coriander, chives)</a></li>
+                <li><a>juice of 1 lemon</a></li>
+                <li><a>Hummus to serve</a></li>
+              </ul>
+
+            </div><!-- End sidebar categories-->
+
+
+
+
+          </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+      </div>
+      <a href="{% url 'blogs:recipes' %}" class="btn btn-success btn-lg btn-block"> Go Back To recipes </a>
+      <br>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+{% endblock body_content %}

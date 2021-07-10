@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+{% block title %}
+Recipe
+{% endblock title %}
+{% block body_content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static '\img\meal4.PNG' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'blogs:recipes4' %}">Roasted Baby Potato Summer Salad</a>
+              </h2>
+
+
+              <div class="entry-content">
+                <h3 class="sidebar-title">Method</h3>
+
+
+                <p>
+                  1-Preheat the oven to 200C or turn on the top grill in the oven and Boil the potatoes until cooked
+                  through in plenty of salted water.
+                </p>
+
+                <p>
+                  2-Drain the potatoes cut them into halves. Drizzle with 1/2tbs of olive oil coating it well and spread
+                  it on a baking tray.
+                </p>
+                <p>
+                  3-Bake or roast under the grill until slightly browned.
+                </p>
+                <p>
+                  4-While the potatoes are cooking, slice the mushrooms, coat them with 1tsp of olive oil and roast
+                  under the grill for 3-5 minutes then Take them out and transfer into a large bowl.
+                </p>
+                <p>
+                  5-Blanch the sugar snaps in plenty of water for one minute, drain and rinse it with ice cold water.
+                  Set aside to dry.
+                </p>
+                <p>
+                  6-Slice the onions, cut the tomatoes in half , chop the herbs.
+                </p>
+                <p>
+                  7-Add all the ingredients into a bowl with mushrooms, mix well and season with salt and pepper.
+                </p>
+
+
+
+
+            </article><!-- End blog entry -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+
+
+            <h3 class="sidebar-title">INGREDIENTS</h3>
+            <div class="sidebar-item categories">
+              <ul>
+                <li><a>500g baby potatoes</a></li>
+                <li><a>200g cherry tomatoes</a></li>
+                <li><a>250g button mushrooms</a></li>
+                <li><a>1 medium red onion</a></li>
+                <li><a>100g sugar snap peas </a></li>
+                <li><a>3 spring onions</a></li>
+                <li><a>2tbs olive oil</a></li>
+                <li><a>1/2cup chopped herbs (dill, parsley, chives</a></li>
+                <li><a>sea salt, pepper</a></li>
+              </ul>
+
+            </div><!-- End sidebar categories-->
+
+
+
+
+          </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+      </div>
+      <a href="{% url 'blogs:recipes' %}" class="btn btn-success btn-lg btn-block"> Go Back To recipes </a>
+      <br>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+{% endblock body_content %}

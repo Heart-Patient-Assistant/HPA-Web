@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+{% block title %}
+Recipe
+{% endblock title %}
+{% block body_content %}
+
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static '\img\meal6.PNG' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'blogs:recipes6' %}">Vegan Spaghetti Bolognese</a>
+              </h2>
+
+
+              <div class="entry-content">
+                <h3 class="sidebar-title">Method</h3>
+
+
+                <p>
+                  1-Mash the tofu with potato masher, set aside then In a food processor pulse the carrot chunks into a
+                  grainy consistency, the pieces should be the size of rice grains.
+                </p>
+
+                <p>
+                  2-Set that aside and do the same with mushrooms, careful not to over process it into a mash.
+                </p>
+                <p>
+                  3-Chop up or grate garlic on microplane then Heat up olive oil in a saucepan, throw in the mushrooms
+                  and carrots.
+                </p>
+                <p>
+                  4-Sauté it for a couple of minutes then add garlic, spices, salt and pepper and Sauté until fragrant
+                  then add tofu.
+                </p>
+                <p>
+                  5-Now add soy sauce, tomato paste and molasses, mix well and sauté for few more minutes
+                </p>
+                <p>
+                  6-Add canned or fresh chopped tomatoes, season it with salt and pepper and let it cook for 10, 15
+                  minutes adjusting the consistency.
+                </p>
+                <p>
+                  7-Add a little water if it’s too thick or let it reduce down if it’s too watery.
+                </p>
+                <p>
+                  8-In the meantime cook spaghetti according to the instructions on the package. I love all my pasta
+                  aldente.
+                </p>
+                <p>
+                  9-Once the sauce is done add nutritional yeast (optional) and chopped basil leaves, turn off the
+                  stove.
+                </p>
+                <p>
+                  10-Drain cooked spaghetti, add half the sauce, mix well, serve and let the family dig in immediately.
+                </p>
+                <p>
+                  11-Let the rest of the sauce cool down to room temperature, store it in an airtight container and
+                  freeze it up to 3 months
+                </p>
+
+
+
+
+            </article><!-- End blog entry -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+
+
+            <h3 class="sidebar-title">INGREDIENTS</h3>
+            <div class="sidebar-item categories">
+              <ul>
+                <li><a>300g block of very firm tofu</a></li>
+                <li><a>2 medium carrot</a></li>
+                <li><a>200g mushroom</a></li>
+                <li><a>3 cloves of garlic</a></li>
+                <li><a>2 cans of chopped tomatoes (or 5, 6 medium fresh tomatoes) </a></li>
+                <li><a>1tbs tomato paste</a></li>
+                <li><a>2tbs olive oil</a></li>
+                <li><a>1tbs molasses</a></li>
+                <li><a>sea salt, pepper</a></li>
+                <li><a>1tbsp soy sauce</a></li>
+                <li><a>1tsp cinnamon</a></li>
+                <li><a>1/2tsp nutmeg</a></li>
+                <li><a>1tsp oregano</a></li>
+                <li><a>handfull of basil leaves </a></li>
+                <li><a>1tbs nutritional yeast (optional) </a></li>
+                <li><a>half the pack of whole-wheat spaghetti 250g</a></li>
+
+              </ul>
+
+            </div><!-- End sidebar categories-->
+
+
+
+
+          </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+      </div>
+      <a href="{% url 'blogs:recipes' %}" class="btn btn-success btn-lg btn-block"> Go Back To recipes </a>
+      <br>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+{% endblock body_content %}

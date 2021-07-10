@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+{% block title %}
+Recipe
+{% endblock title %}
+{% block body_content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="breadcrumb-hero">
+        <div class="container">
+          <div class="breadcrumb-hero">
+
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static '\img\meal1.PNG' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'blogs:recipes1' %}">French Beans and Mustard Greens Salad</a>
+              </h2>
+
+
+              <div class="entry-content">
+                <h3 class="sidebar-title">Method</h3>
+
+
+                <p>
+                1-Trim the stalk ends of the beans and peas. Blanch the beans in plenty of water for 3-4 minutes, drain and place them into a bowl with ice water to stop them from cooking further. Make sure to use a lot of water both for cooking and cooling to preserve the bright green color and crunchiness of the beans. Drain and set them aside to dry.
+                </p>
+
+                <p>
+                  2-Repeat with the sugar snaps, but blanch them for only a minute.
+                </p>
+                <p>
+                  3-Peal the zest of an orange with vegetable peeler and slice it thinly.
+                </p>
+                <p>
+                  4-Chop the almonds roughly, toast them slightly on a skillet or in the oven.
+                </p>
+                <p>
+                  5-In a large bowl mix the greens, beans, peas and orange zest, add the garlic, oil, nuts, chives and season with sea salt and pepper.
+                </p>
+
+
+
+
+            </article><!-- End blog entry -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+
+
+              <h3 class="sidebar-title">INGREDIENTS</h3>
+              <div class="sidebar-item categories">
+                <ul>
+                  <li><a >200g green beans</a></li>
+                  <li><a >200g sugar snap peas</a></li>
+                  <li><a >100g mustard greens</a></li>
+                  <li><a >50g almonds </a></li>
+                  <li><a >zest of 1/2 orange </a></li>
+                  <li><a>handfull of chopped chives</a></li>
+                  <li><a >2tbs olive oil  </a></li>
+                  <li><a >2 garlic cloves (minced) </a></li>
+                  <li><a >sea salt, pepper</a></li>
+                </ul>
+
+              </div><!-- End sidebar categories-->
+
+
+
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
+
+      </div>
+      <a href="{% url 'blogs:recipes' %}" class="btn btn-success btn-lg btn-block"> Go Back To recipes </a>
+      <br>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+{% endblock body_content %}
+
