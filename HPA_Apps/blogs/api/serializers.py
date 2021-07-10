@@ -14,7 +14,7 @@ class PostCreateUpdateSerializer(ModelSerializer):
             "body",
             # "post_date",
             # "status",
-            # "image",
+            "header_image",
         )
 
 

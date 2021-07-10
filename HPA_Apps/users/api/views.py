@@ -1,11 +1,16 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from .serializers import CreateAccountSerializer, EditingProfileSerializer
+from .serializers import CreateAccountSerializer, EditingProfileSerializer,AppointmentCreateUpdateSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework import permissions, serializers
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework import generics
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+)
 
-from HPA_Apps.users.models import Profile
+from HPA_Apps.users.models import Profile,appointment
 
 # creating new account and send back the token
 @api_view(["POST", "GET"])
@@ -108,3 +113,14 @@ class CustomAuthToken(ObtainAuthToken):
             'type': user.type,
             'email': user.email
         })
+
+class AppCreateAPIView(generics.CreateAPIView):
+    queryset = appointment.objects.all()
+    serializer_class = AppointmentCreateUpdateSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(patient=self.request.user)
+
+    # def get_queryset(self,serializer):
+    #     serializer.save(doctor=User.objects.filter(type="DOCTOR"))

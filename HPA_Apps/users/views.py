@@ -206,7 +206,7 @@ class AppointmentsForAPatientView(LoginRequiredMixin, ListView):
 class AppointmentsForADoctorView(LoginRequiredMixin, ListView):
     login_url = "/users/login/"
     redirect_field_name = "account:login"
-    template_name = "appointment_list.html"
+    template_name = "appointment_list_Doctor.html"
 
     def get_queryset(self):
         return appointment.objects.filter(doctor=self.request.user)

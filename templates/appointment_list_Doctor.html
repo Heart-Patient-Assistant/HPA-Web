@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 
-{% block body_content %}
+{% block content %}
 <br>
 <br>
 <br>
@@ -11,24 +11,23 @@
 <div class="container">
     <h2>Your Appointments</h2>
     <div>
-        {% if user.Type == PATIENT %}
+
+        {% if user.Type == DOCTOR %}
         <table class="table table-striped">
             <thead>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Consulting Doctor</th>
-                <th>Status</th>
+                <th>Patient Info</th>
             </thead>
             {% for obj in object_list %}
             <tr>
                 <td>{{ obj.date }}</td>
                 <td>{{ obj.time }}</td>
-                <td>{{ obj.doctor }}</td>
-                <td>{{ obj.status }}</td>
+                <td>{{ obj.patient }}</td>
             </tr>
             {% endfor %}
         </table>
         {% endif %}
-    </div>  
+    </div>
 </div>
 {% endblock %}

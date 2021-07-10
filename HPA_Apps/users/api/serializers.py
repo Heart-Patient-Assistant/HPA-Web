@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from HPA_Apps.users.models import User, Patient, Doctor, Profile
+from HPA_Apps.users.models import User, Patient, Doctor, Profile , appointment
 
 
 class CreateAccountSerializer(serializers.ModelSerializer):
@@ -65,3 +65,16 @@ class EditingProfileSerializer(serializers.ModelSerializer):
         profile.birth_date = birth_date
 
         profile.save()
+
+class AppointmentCreateUpdateSerializer(serializers.ModelSerializer):
+    # doctor = SerializerMethodField()
+    class Meta:
+        model = appointment
+        fields = (
+            'date',
+            'time',
+            'status',
+            # 'patient',
+            'doctor'
+
+        )

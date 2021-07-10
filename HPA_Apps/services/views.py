@@ -15,9 +15,9 @@ from django.shortcuts import render
 #cnn
 import numpy as np
 import pandas as pd
-from keras.models import load_model
-import wfdb
-from numpy import savetxt
+# from keras.models import load_model
+# import wfdb
+# from numpy import savetxt
 
 
 
